@@ -82,7 +82,7 @@ class UserProfileForm(forms.ModelForm):
     firstname = forms.CharField(
         label='firstname',
         required=True,
-        idget=forms.TextInput(attrs={'class': 'form-input',
+        widget=forms.TextInput(attrs={'class': 'form-input',
                                      'autocomplete': 'off'})
     )
     lastname = forms.CharField(
