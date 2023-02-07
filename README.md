@@ -3,7 +3,7 @@
 `git clone https://github.com/sg-source/backwood.git && cd ./backwood `
 
 `docker-compose up --build -d`
-
+###### if you run docker on localhost, move on `http://127.0.0.1:8080/`, otherwise `http://virtual-machine-ip:8080/`
 ### Welcome
  ![Backwood](/web/GH/backwood.png)
 
