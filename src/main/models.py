@@ -3,7 +3,7 @@ from datetime import datetime, timedelta
 from decimal import Decimal
 import random
 
-from django.db.models import Q, Case, When, Value as V, BooleanField
+from django.db.models import Q, Case, BooleanField, When, Value as V
 from django.utils.safestring import mark_safe
 from django.db import models
 from django.urls import reverse
