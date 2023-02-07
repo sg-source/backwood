@@ -1,0 +1,12 @@
+version: '3.7'
+
+services:
+  app:
+    env_file:
+      - ./.env/dev.env
+    build: .
+    container_name: app
+    hostname: app
+    ports:
+      - '8080:8080'
+

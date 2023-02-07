@@ -1,0 +1,103 @@
+{% load static %}
+<div class="modal-dialog modal-dialog-centered product__modal" role="document">
+    <div class="modal-content">
+        <div class="product__modal-wrapper p-relative">
+            <div class="product__modal-close p-absolute">
+                <button data-bs-dismiss="modal"><i class="fal fa-times"></i></button>
+            </div>
+            <div class="product__modal-inner">
+                <div class="row">
+                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                        <div class="product__modal-box">
+                            <div class="tab-content" id="modalTabContent">
+                                <div class="tab-pane fade show active" id="nav1" role="tabpanel"
+                                     aria-labelledby="nav1-tab">
+                                    <div class="product__modal-img w-img">
+                                        <img src="{{ product.image.url }}" alt="">
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="nav2" role="tabpanel" aria-labelledby="nav2-tab">
+                                    <div class="product__modal-img w-img">
+                                        <img src="{{ product.image_second.url }}" alt="">
+                                    </div>
+                                </div>
+                            </div>
+                            <ul class="nav nav-tabs productmini-bar" id="modalTab" role="tablist">
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link active" id="nav1-tab" data-bs-toggle="tab"
+                                            data-bs-target="#nav1" type="button" role="tab" aria-controls="nav1"
+                                            aria-selected="true">
+                                        <img class="model-dialog-img" src="{{ product.image.url }}" alt="" width="85">
+                                    </button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link" id="nav2-tab" data-bs-toggle="tab" data-bs-target="#nav2"
+                                            type="button" role="tab" aria-controls="nav2" aria-selected="false">
+                                        <img class="model-dialog-img" src="{{ product.image_second.url }}" alt=""
+                                             width="85">
+                                    </button>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                        <div class="product__modal-content">
+                            <h4 class="product__modal-title"><a id="qweqwe" href="product-details.html">
+                                {{ product.name }}</a></h4>
+                            <div class="product__modal-des mb-40">
+                                <p>{{ product.short_description }}</p>
+                            </div>
+                            <div class="product__modal-stock">
+                                <span>Availability :</span>
+                                {% if product.quantity > 0 %}
+                                <span>In Stock</span>
+                                {% else %}
+                                <span style="color: red;">Out of Stock</span>
+                                {% endif %}
+                            </div>
+                            <div class="product__modal-stock sku mb-30">
+                                <span>SKU:</span>
+                                <span>{{ product.sku }}</span>
+                            </div>
+                            <div class="product__modal-price mb-20">
+                                <span>${{ product.get_total_price }}</span>
+                            </div>
+                            <div class="product__modal-form flex-vertical-center mb-30">
+                                <form class="add-product-form miniproduct-form" action="/cart/add/{{ product.id }}/"
+                                      method="post">
+                                    <input type="hidden" name="slug" value="{{ product.slug }}" id="id_slug">
+                                    {% csrf_token %}
+                                    <div class="pro-cart-btn miniproduct-add-to-cart">
+                                        <button data-tooltip="" class="add-to-cart-btn miniproduct-btn">Add to cart
+                                        </button>
+
+                                    </div>
+                                </form>
+                                <div class="product__modal-links ml-25">
+                                    <ul>
+                                        <li>
+                                            <a>
+                                                <form class="add-wish-product-form"
+                                                      action="/favourites/add/{{product.id}}"
+                                                      method="post">
+                                                    {% csrf_token %}
+                                                    <input type="hidden" name="product_id" value="{{ product.id }}"
+                                                           id="product_id">
+                                                    <button>
+                                                        <i class="like-button fa fa-heart {% if product.id in favourites %}
+                                                animate{% endif %}" aria-hidden="true"></i>
+                                                    </button>
+                                                </form>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,61 @@
+{% load static %}
+
+<div class="modal-dialog overflow-hidden">
+    <div class="modal-content">
+        <div class="cartmini__wrapper">
+            {% if cart %}
+            <div class="cartmini__top d-flex align-items-center justify-content-between">
+                <h4>Your Cart</h4>
+                <div class="cartminit__close">
+                    <button type="button" data-bs-dismiss="modal" data-bs-target="#cartMiniModal"
+                            class="cartmini__close-btn"><i class="fal fa-times"></i></button>
+                </div>
+            </div>
+            <div class="cartmini__list">
+                <ul>
+                    {% for item in cart %}
+                    {% with product=item.product %}
+                    <li class="cartmini__item p-relative d-flex align-items-start">
+                        <div class="cartmini__thumb mr-15">
+                            <a href="{{ product.absolute_url }}">
+                                <img src="{% get_media_prefix %}{{ product.image }}" alt="">
+                            </a>
+                        </div>
+                        <div class="cartmini__content">
+                            <h3 class="cartmini__title">
+                                <a href="{{ product.absolute_url }}">{{ product.name }}</a>
+                            </h3>
+                            <span class="cartmini__price">
+                                    <span class="price">{{ item.quantity }} × ${{ item.price }}</span>
+                                </span>
+                        </div>
+                        <form action="{% url 'cart:remove' product.id %}" method="post"
+                              class="pt-20 remove-product-form">
+                            {% csrf_token%}
+                            <button><i class="cartmini__remove fal fa-times mt-20 mr-30"></i></button>
+                        </form>
+                        </a>
+                    </li>
+                    {% endwith %}
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="cartmini__total d-flex align-items-center justify-content-between">
+                <h5>Total</h5>
+                <span>${{ cart.get_total }}</span>
+            </div>
+            <div class="cartmini__bottom">
+                <a href="{% url 'cart:detail' %}" class="b-btn w-100 mb-20">view cart</a>
+                <a href="{% url 'order:checkout' %}" class="b-btn-2 w-100">checkout</a>
+            </div>
+            {% else %}
+            <div class="container">
+                <p class="center-pos">Your cart is still empty </p>
+            </div>
+            <div class="cartmini__bottom">
+                <a href="{% url 'main:shop' %}" class="b-btn w-100 mb-20">go shopping</a>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>

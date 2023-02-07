@@ -1,0 +1,152 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block header %}
+{% endblock %}
+
+{% block content %}
+<main>
+    <!-- signup__area start -->
+    <section class="signup__area po-rel-z1 pt-40 pb-50">
+        <div class="container">
+            <div class="row">
+                <div class="col-xxl-6 offset-xxl-3 col-xl-6 offset-xl-3 col-lg-8 offset-lg-2">
+                    <div class="sign__wrapper white-bg">
+                        <div class="sign__header mb-35">
+                            <!--                       <div class="sign__in text-center">-->
+                            <!--                          <a href="#" class="sign__social g-plus text-start mb-15"><i class="fab fa-google-plus-g"></i>Sign Up with Google</a>-->
+                            <!--                          <p> <span>........</span> Or, <a href="sign-up.html">sign up</a> with your email<span> ........</span> </p>-->
+                            <!--                       </div>-->
+                            <div class="sign__in text-center">
+                                <div class="sign__in_logo pb-25">
+                                    <a href="{% url 'main:index' %}"><img src="{% static 'assets/img/logo/logo.png' %}"
+                                                                          alt=""></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="sign__form">
+                            <form method="post">
+                                {% csrf_token %}
+                                <div class="sign__input-wrapper mb-35">
+                                    <h5>{{ form.firstname.label | capfirst }}</h5>
+                                    <div class="sign__input">
+                                        {{ form.firstname}}
+                                        <i class="fal fa-user"></i>
+                                    </div>
+                                </div>
+                                <div class="sign__input-wrapper mb-35">
+                                    <h5>{{ form.email.label | capfirst }}</h5>
+                                    <div class="sign__input">
+                                        {{ form.email }}
+                                        <i class="fal fa-envelope"></i>
+                                        {{ form.email.errors }}
+                                    </div>
+                                </div>
+                                <div class="sign__input-wrapper mb-35">
+                                    <h5>{{ form.password1.label | capfirst }}</h5>
+                                    <div class="sign__input">
+                                        {{ form.password1 }}
+                                        <i class="fal fa-lock"></i>
+                                        {{ form.password1.errors }}
+                                    </div>
+                                </div>
+                                <div class="sign__input-wrapper mb-50">
+                                    <h5>{{ form.password2.label | capfirst }}</h5>
+                                    <div class="sign__input">
+                                        {{ form.password2 }}
+                                        <i class="fal fa-lock"></i>
+                                        {{ form.password2.errors }}
+                                    </div>
+                                </div>
+                                <div class="sign__action d-flex justify-content-between mb-30">
+                                    <div class="sign__agree d-flex align-items-center">
+                                        {{ form.approval }}
+                                        <label class="m-check-label" for="m-agree">I agree to the
+                                            <a href="#" data-name="tilbury-grey-office-table" data-target="#"
+                                               data-bs-toggle="modal" data-bs-target="#TermsConditions">
+                                                Terms
+                                                &amp; Conditions
+                                            </a>
+                                            </a>
+                                        </label>
+                                    </div>
+                                </div>
+                                <button class="btn-tp w-100"><span></span> Sign Up</button>
+                                <div class="sign__new text-center mt-20">
+                                    <p>Already in Backwood ? <a href="{% url 'auth:login' %}"> Sign In</a></p>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- signup__area end -->
+</main>
+
+<div class="modal fade" id="TermsConditions" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Terms &amp; Conditions</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
+            </div>
+            <div class="modal-body">
+                <h3>Orders and Contract</h3>
+                Your order for goods is accepted and a contract is formed between Next and you when we despatch the
+                goods you have ordered and not before. A contract is not formed at the point in time that payment has
+                been taken from you by Next, nor at the point in time that you receive an email from Next acknowledging
+                receipt of your order. Until the goods are despatched the order may not be accepted by Next, or may be
+                cancelled by you. Exceptions apply to orders for personalised items and goods made to your order which
+                cannot be cancelled by you once you have received an email confirmation that your order has been
+                received, as such items and goods may already be in production as a result of your order. For a full
+                list of exceptions to items you can return please see under the heading EXCEPTIONS TO THE RETURNS
+                POLICY. For security reasons, until you have placed an order for goods, received your first statement
+                and a payment has been received for those goods, you will be unable to order gift cards. For security
+                reasons we may restrict the volumes of certain items to be sold in any one transaction. Following
+                formation of the contract, Next shall continue to own any goods ordered until it has received payment in
+                full from you, even though the goods may have already been delivered to you. Purchases from Next Online,
+                or Little Label, including transactions on your nextpay or Directory Card in-store will be charged the
+                day the goods are despatched/purchased in-store.
+
+                <h3 class="mt-35">Cancelling Your Order</h3>
+                Under Consumer Regulations you have the right to cancel your order as long as you do so no later than 14
+                days after the day on which you receive the goods or service. Please be aware that your right to cancel
+                does not apply to certain goods that we sell, for example, items made or customised to your order, (such
+                as photo gifts, made to measure curtains, fabric sold by the metre and personalised goods), fresh
+                flowers, perishable food items, audio or DVD recordings, computer software and games, toiletries and
+                cosmetics where the seal has been broken, or pierced jewellery items. You must inform us of your wish to
+                cancel in writing either by letter, email or by using the cancellation form on the website or call 0333
+                777 8000# within a period of 14 days beginning on the day after the day you receive your goods. You must
+                take reasonable care of the goods and not use them. You should return goods to us in their original
+                packaging, wherever possible, within 14 days of informing us of your wish to cancel. If you return goods
+                to us, we will not be responsible for any loss or damage to them during transit and we recommend that
+                you use a recorded or secure delivery method. If goods are lost or damaged in transit, we may charge
+                you, or not refund to you, amounts that are attributable to the loss or damage. See RETURNS section for
+                details of how to return goods to us.
+
+
+                <h3 class="mt-35">Delivery to Stores</h3>
+                Delivery to stores is free. At times of peak trade, we may charge 25p for the Next Day To Store service,
+                delivery to store will remain FREE for any subsequent days. You will be advised of the earliest delivery
+                date at the time of order. The next day delivery to store service applies to most orders placed before
+                11pm on any day. Delivery times cannot be guaranteed. It is available in most stores, excluding airport
+                and Fabled stores and is subject to stock availability and demand. Delivery to store is not available
+                for certain items listed below in the STORE DELIVERY EXCEPTIONS section. Please take one form of
+                personal identification e.g. driving license or utility bill and either your credit account statement,
+                delivery note or letter accompanying your Directory. We will email you when your order is ready for
+                collection at your designated store. Parcels will be available for collection in most stores on the
+                stated delivery day after 12 noon. Orders delivered to stores that are not collected within 10 days of
+                the collection date will be returned to the warehouse and a refund processed.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">OK</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock%}
+
+{% block footer %}
+{% endblock %}

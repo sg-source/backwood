@@ -1,0 +1,43 @@
+<table class="table">
+    <thead>
+    <tr>
+        <th class="product-thumbnail">Images</th>
+        <th class="cart-product-name">Product</th>
+        <th class="product-price">Unit Price</th>
+        <th class="product-quantity">Quantity</th>
+        <th class="product-subtotal">Total</th>
+        <th class="product-remove">Remove</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for item in cart %}
+    {% with product=item.product %}
+    <tr>
+        <td class="product-thumbnail"><a href="{{ product.get_absolute_url }}"><img src="{{ product.image.url }}"
+                                                                                    alt=""></a></td>
+        <td class="product-name"><a href="{{ product.get_absolute_url }}">{{ product.name }}</a></td>
+        <td class="product-price"><span class="amount">${{ item.price }}</span></td>
+        <td class="product-quantity">
+            <form action="{% url 'cart:add' product.id %}" method="post">
+                <input type="hidden" name="slug" value="{{ product.slug }}" id="id_slug">
+                {% csrf_token %}
+                {{ form.override }}
+                <div data-tooltip="" id="cartItemQty" class="cart-plus-minus">
+                    <input  type="number" min="1" max="10" value="{{ item.quantity }}">
+                </div>
+            </form>
+        </td>
+        <td class="product-subtotal"><span id="{{ product.id }}" class="amount">${{ item.price }}</span></td>
+
+        <td class="product-remove">
+            <form class="remove-product-form" action="{% url 'cart:remove' product.id %}" method="post">
+                {% csrf_token%}
+                <button><i class="fa fa-times"></i></button>
+            </form>
+        </td>
+
+    </tr>
+    {% endwith %}
+    {% endfor %}
+    </tbody>
+</table>

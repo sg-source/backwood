@@ -1,0 +1,17 @@
+{% load static %}
+{% if messages %}
+{% for message in messages %}
+<ul class="messages {% if message.tags %}message-{{ message.tags }}{% endif %} pt-15 pb-15">
+    <div class="container">
+        <div class="message-item">
+            {% if message.tags == 'info' %}
+            <img src="{% static 'assets/img/icon/sad.png' %}" alt="">
+            {% elif message.tags == 'success' %}
+            <img src="{% static 'assets/img/icon/correct.png' %}" alt="">
+            {% endif %}
+            <li>{{ message }}</li>
+        </div>
+    </div>
+</ul>
+{% endfor %}
+{% endif %}

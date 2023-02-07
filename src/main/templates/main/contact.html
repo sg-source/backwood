@@ -1,0 +1,160 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<main>
+    <section class="contact-area pt-120 pb-65 fix">
+        <div class="container">
+            <div class="row">
+                <div class="col-xxl-5 col-xl-6 col-lg-6">
+                    <div class="sec-wrapper">
+                        <h5>Contact With Us</h5>
+                        <h2 class="absection-title">Speak with our Expert.</h2>
+                    </div>
+                    <div class="contact-info mr-50 mr-xs-0  mr-md-0 mb-30">
+                        <div class="single-contact-info d-flex align-items-center">
+                            <div class="contact-info-icon">
+                                <a href="#"><i class="fal fa-phone-alt"></i></a>
+                            </div>
+                            <div class="contact-info-text mt-10">
+                                <span>Call Anytime</span>
+                                <h5><a href="tell:926668880000">92 666 888 0000</a></h5>
+                            </div>
+                        </div>
+                        <div class="single-contact-info d-flex align-items-center">
+                            <div class="contact-info-icon">
+                                <a href="#"><i class="fal fa-envelope"></i></a>
+                            </div>
+                            <div class="contact-info-text mt-10">
+                                <span>send email</span>
+                                <h5><a href="mailto:needhelp@company.com">needhelp@company.com</a></h5>
+                            </div>
+                        </div>
+                        <div class="single-contact-info d-flex align-items-center">
+                            <div class="contact-info-icon">
+                                <a href="#"><i class="fal fa-map-marker-alt"></i></a>
+                            </div>
+                            <div class="contact-info-text mt-10">
+                                <span>visit office</span>
+                                <h5><a target="_blank"
+                                       href="https://www.google.com/maps/place/Peter+Cooper+Village/@40.7348141,-73.9790254,17z/data=!4m13!1m7!3m6!1s0x89c24fa5d33f083b:0xc80b8f06e177fe62!2sNew+York,+NY,+USA!3b1!8m2!3d40.7127753!4d-74.0059728!3m4!1s0x89c259e57464e6fb:0x537c7117719c8f74!8m2!3d40.7353483!4d-73.9772081">350
+                                    New York, United States</a></h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xxl-7 col-xl-6 col-lg-6">
+                    <form id="contacts-form" class="conatct-post-form">
+                        <div class="row">
+                            <div class="col-xl-6 col-lg-6 col-md-6">
+                                <div class="contact-icon p-relative contacts-name">
+                                    {{ form.firstname }}
+                                </div>
+                            </div>
+                            <div class="col-xl-6 col-lg-6 col-md-6">
+                                <div class="contact-icon p-relative contacts-name">
+                                    {{ form.email }}
+                                </div>
+                            </div>
+                            <div class="col-xl-6">
+                                <div class="contact-icon p-relative contacts-Phone">
+                                    {{ form.phone }}
+                                </div>
+                            </div>
+                            <div class="col-xl-6">
+                                <div class="contact-icon p-relative contacts-email">
+                                    {{ form.subject }}
+                                </div>
+                            </div>
+                            <div class="col-xl-12">
+                                <div class="contact-icon p-relative contacts-message">
+                                    {{ form.message }}
+                                </div>
+                            </div>
+                            <div class="col-xl-12">
+                                <div class="contact- mt-15">
+                                    <button class="btn-tp mt-15" type="submit">Send Message</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="map-area">
+        <div class="contact-map">
+            <div id="contact-map">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3023.236826211894!2d-73.97902538431153!3d40.73481409415593!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c259e57464e6fb%3A0x537c7117719c8f74!2sPeter%20Cooper%20Village!5e0!3m2!1sen!2sbd!4v1645068006928!5m2!1sen!2sbd"
+                        width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+            </div>
+        </div>
+    </section>
+
+    <div class="brand-area-2 mt-35 mb-30">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="col-xxl-12">
+                        <div class="brand__slider-2 owl-carousel">
+                            <div class="brand__item">
+                                <a href="#"><img src="{% static 'assets/img/brand/brand-1.png' %}" alt=""></a>
+                            </div>
+                            <div class="brand__item swiper-slide">
+                                <a href="#"><img src="{% static 'assets/img/brand/brand-2.png' %}" alt=""></a>
+                            </div>
+                            <div class="brand__item swiper-slide">
+                                <a href="#"><img src="{% static 'assets/img/brand/brand-3.png' %}" alt=""></a>
+                            </div>
+                            <div class="brand__item swiper-slide">
+                                <a href="#"><img src="{% static 'assets/img/brand/brand-4.png' %}" alt=""></a>
+                            </div>
+                            <div class="brand__item swiper-slide">
+                                <a href="#"><img src="{% static 'assets/img/brand/brand-5.png' %}" alt=""></a>
+                            </div>
+                            <div class="brand__item swiper-slide">
+                                <a href="#"><img src="{% static 'assets/img/brand/brand-6.png' %}" alt=""></a>
+                            </div>
+                            <div class="brand__item swiper-slide">
+                                <a href="#"><img src="assets/img/brand/brand-2.png" alt=""></a>
+                            </div>
+                            <div class="brand__item swiper-slide">
+                                <a href="#"><img src="assets/img/brand/brand-4.png" alt=""></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section class="quality-area pt-120 pb-90 fix">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-8 col-md-9">
+                    <div class="kquality mb-30 aos-init aos-animate" data-aos="zoom-in-right">
+                        <div class="kquality-icon">
+                            <i class="fal fa-truck"></i>
+                        </div>
+                        <div class="kquality-text fix">
+                            <h3 class="mb-20 kquality-text-title">We Deliver the Best Quality</h3>
+                            <p>There are many variations of passages of Lorem Ipsum available, but the majority have
+                                suffered in some form, by injected words.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-3">
+                    <div class="text-lg-end mb-30 aos-init aos-animate" data-aos="zoom-in-left">
+                        <div class="kquality-img">
+                            <img style="height:150px;" src="{% static 'assets/img/about/contact-bellow.jpg' %}"
+                                 class="img-fluid" alt="cta-img">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</main>
+{% endblock %}

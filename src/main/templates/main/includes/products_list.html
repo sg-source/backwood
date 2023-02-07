@@ -1,0 +1,213 @@
+{% load static %}
+<div class="shop-top-area mb-20">
+    <div class="row">
+        <div class="col-xxl-4 col-xl-2 col-md-3 col-sm-3">
+            <div class="shop-top-left">
+                <span class="label mr-15">View:</span>
+                <div class="nav d-inline-block tab-btn-group" id="nav-tab" role="tablist">
+                    <button class="active" data-bs-toggle="tab" data-bs-target="#tab1" type="button"><i
+                            class="fas fa-border-none"></i></button>
+                    <button data-bs-toggle="tab" data-bs-target="#tab2" type="button" class=""><i
+                            class="fas fa-list"></i></button>
+                </div>
+            </div>
+        </div>
+        <div class="col-xxl-4 col-xl-6 col-md-6 col-sm-6">
+            <p class="show-total-result text-sm-center">Showing
+                {{ page_obj.start_index }}-{{ page_obj.end_index }}
+                of {{ page_obj.paginator.count }}</p>
+        </div>
+        <div class="col-xl-4 col-xl-4 col-md-3 col-sm-3">
+            <div class="text-sm-end">
+<!--                <div class="select-default">-->
+<!--                    <select name="short" id="short" class="shorting-select" style="display: none;">-->
+<!--                        <option value="">Default sorting</option>-->
+<!--                        <option value="">ASC</option>-->
+<!--                        <option value="">DEC</option>-->
+<!--                    </select>-->
+<!--&lt;!&ndash;                    TODO finish Default sorting&ndash;&gt;-->
+<!--                    <div class="nice-select shorting-select" tabindex="0"><span class="current">Default sorting</span>-->
+<!--                        <ul class="list">-->
+<!--                            <li data-value="" class="option selected focus">Default sorting</li>-->
+<!--                            <li data-value="" class="option">ASC</li>-->
+<!--                            <li data-value="" class="option">DEC</li>-->
+<!--                        </ul>-->
+<!--                    </div>-->
+<!--                </div>-->
+            </div>
+        </div>
+    </div>
+</div>
+<div class="shop-main-area mb-40">
+    <div class="tab-content" id="nav-tabContent">
+        <div class="tab-pane fade active show" id="tab1">
+            <div class="row">
+
+                {% for item in products %}
+                <div class="col-xxl-3 col-xl-4 col-lg-4 col-md-6">
+                    <div class="product__item mb-20">
+                        <div class="product__thumb w-img fix">
+                            <a href="{% url 'main:product_detail' item.slug %}">
+                                <img src="{% get_media_prefix %}{{ item.image }}" alt="">
+                            </a>
+
+                            <div class="product__flash-4">
+                                {% if item.is_discount %}
+                                    <span class="discount mr-15">{{ item.sum_discount }}%</span>
+                                {% endif %}
+                                {% if item.new %}
+                                    <span class="new">new</span>
+                                {% endif %}
+
+                            </div>
+
+                            <div class="product__action transition-3">
+                                <ul>
+                                    <li>
+                                        <form class="add-product-form" action="{% url 'cart:add' item.id %}"
+                                              method="post">
+                                            {% csrf_token %}
+                                            <input type="hidden" name="override" value="False" id="id_override">
+                                            <input type="hidden" name="quantity" value="1" id="id_quantity">
+                                            <input type="hidden" name="slug" value="{{ item.slug }}" id="id_slug">
+                                            <button data-tooltip="">
+                                                <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                                            </button>
+                                        </form>
+                                    </li>
+                                    <li>
+                                        <form class="add-wish-product-form" action="{% url 'favourites:add' item.id %}"
+                                              method="post">
+                                            {% csrf_token %}
+                                            <input type="hidden" name="product_id" value="{{ item.id }}"
+                                                   id="product_id">
+                                            <button>
+                                                <i class="like-button fa fa-heart {% if item.id in favourites %}
+                                                animate{% endif%}" aria-hidden="true"></i>
+                                            </button>
+                                        </form>
+                                    </li>
+                                    <li>
+                                        <button data-name="{{ item.slug }}" data-target="#"
+                                                data-bs-toggle="modal" data-bs-target="#productModalId">
+                                            <svg viewBox="0 0 22 22">
+                                                <path d="M11,19c-6.53,0-10.42-7.23-10.58-7.53L0.17,11l0.25-0.47C0.58,10.23,4.47,3,11,3s10.42,7.23,10.58,7.53L21.83,11l-0.25,0.47
+                                            C21.42,11.77,17.53,19,11,19z M2.46,11c0.92,1.49,4.08,6,8.54,6c4.48,0,7.63-4.51,8.54-6C18.62,9.52,15.46,5,11,5
+                                            C6.52,5,3.37,9.51,2.46,11z M11,15c-2.21,0-4-1.79-4-4s1.79-4,4-4s4,1.79,4,4S13.21,15,11,15z M11,9c-1.1,0-2,0.9-2,2s0.9,2,2,2
+                                            s2-0.9,2-2S12.1,9,11,9z"></path>
+                                            </svg>
+                                        </button>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="product__content">
+                            <div class="product__tag product__tag-4">
+                                <span>
+                                    <a href="{{ item.category.absolute_url }}">{{ item.category.name | upper }}</a>
+                                </span>
+                            </div>
+                            <h3 class="product__title">
+                                <a href="{{ item.absolute_url }}">{{ item.name | upper }},
+                                    {{ item.product_sub_type.name_singular}}</a>
+                            </h3>
+                            <div class="product__price product__price-4 mb-10">
+                                <span class="price">${{ item.get_total_price }}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+
+            </div>
+        </div>
+        <div class="tab-pane fade" id="tab2">
+            <div class="row">
+                <div class="productwrap">
+                    {% for item in products %}
+                    <div class="single-product mb-30 wood-list-product-wrap">
+                        <div class="row align-items-xl-center">
+                            <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-4">
+                                <div class="product-thumb mr-30 product-thumb-list w-img">
+                                    <img src="{% get_media_prefix %}{{ item.image }}" alt="#">
+                                    <img src="{% get_media_prefix %}{{ item.image_second}}" alt="#">
+                                </div>
+                            </div>
+                            <div class="col-xxl-8 col-xl-8 col-lg-8 col-md-8">
+                                <div class="wood-product-content wood-product-list-content">
+                                    <h4 class="pro-title pro-title-1">
+                                        <a href="{{ item.absolute_url }}">{{ item.name}}</a>
+                                    </h4>
+                                    <div class="pro-price">
+
+                                        <span>${{ item.get_total_price  }}</span>
+                                        {% if item.is_discount %}
+                                        <del>${{ item.price }}</del>
+                                        {% endif %}
+                                    </div>
+                                    <p>{{ item.short_description }}</p>
+                                    <div class="wood-shop-product-actions flex-vertical-center">
+                                        <form class="add-product-form miniproduct-form mr-10"
+                                              action="/cart/add/{{ item.id }}/" method="post">
+                                            <button data-tooltip="" class="wood-cart-btn">Add to cart</button>
+                                        </form>
+                                        <form class="add-wish-product-form" action="{% url 'favourites:add' item.id %}"
+                                              method="post">
+                                            {% csrf_token %}
+                                            <input type="hidden" name="product_id" value="{{ item.id }}"
+                                                   id="product_id">
+                                            <button class="wood-proudct-btn-boxed">
+                                                <i class="like-button fa fa-heart {% if item.id in favourites %}
+                                                animate{% endif%}" aria-hidden="true"></i>
+                                            </button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="shop-pagination">
+    <div class="basic-pagination">
+        <nav>
+            <ul>
+                {% if products %}
+                {% if page_obj.has_previous or page_obj.has_next %}
+                {% if page_obj.has_previous %}
+                <li>
+                    <a href="{{ request.path }}?page={{ page_obj.previous_page_number }}">
+                        <i class="far fa-angle-left"></i>
+                    </a>
+                </li>
+                {% endif %}
+
+                {% for i in page_obj.paginator.page_range %}
+
+                <li>
+                    <a href="{{ request.path }}?page={{ i }}"
+                       class="{% if page_obj.number == i %}active {% endif %}">{{ i }}</a>
+                </li>
+                {% endfor %}
+
+                {% if page_obj.has_next %}
+
+                <li>
+                    <a href="{{ request.path }}?page={{ page_obj.next_page_number }}">
+                        <i class="far fa-angle-right"></i>
+                    </a>
+                </li>
+                {% endif %}
+                {% endif %}
+                {% else %}
+                <p style="color:#888888;">{{ no_products_msg }}</p>
+                {% endif %}
+            </ul>
+        </nav>
+    </div>
+</div>
+<div class="products-overlay"></div>

@@ -1,0 +1,26 @@
+{% load static %}
+<div class="header__action ml-30">
+    <ul>
+        {% if user.is_authenticated %}
+        <li>
+            <a href="{% url 'auth:profile' user.pk %}"><i
+                    class="fal fa-user-circle"></i></a>
+        </li>
+        <li>
+            <a href="{% url 'auth:logout' %}"><i class="fal fa-sign-out"></i></a>
+        </li>
+        {% else %}
+        <li>
+            <a href="{% url 'auth:login' %}"><i class="fal fa-sign-in"></i></a>
+        </li>
+        {% endif %}
+        <li>
+            <a href="#" data-bs-toggle="modal" data-bs-target="#cartMiniModal">
+                <i class="fal fa-shopping-basket"></i>
+                {% if cart %}
+                <span class="cart-count">{{ cart_len }}</span>
+                {% endif %}
+            </a>
+        </li>
+    </ul>
+</div>

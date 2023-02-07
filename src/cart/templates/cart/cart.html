@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block minicart %}
+{% endblock %}
+
+{% block content %}
+<main>
+    <section class="cart-area pt-80 pb-120">
+        <div class="container">
+            <h2 class="pb-40">Your Cart</h2>
+            <div class="row">
+                <div class="col-12">
+                    <div class="table-content table-responsive">
+                        {% include 'cart/includes/cart-table.html' %}
+                    </div>
+                    {% if not request.session.coupon_id %}
+                    <div id="couponBlock" class="row">
+                        <div class="col-12">
+                            <div class="coupon-all">
+                                <div class="coupon">
+                                    <form id="couponForm" action="/coupon/apply/" method="post">
+                                        {% csrf_token %}
+                                        {{ coupon_apply_form.code }}
+                                        <button id="couponBtn" class="btn-tp-2" name="apply_coupon" type="submit">Apply
+                                            coupon
+                                        </button>
+                                    </form>
+
+                                </div>
+                                <div class="coupon2">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+                    <div class="row justify-content-end">
+                        <div class="col-md-5">
+                            <div class="cart-page-total">
+                                <h2>Cart totals</h2>
+                                <ul class="mb-20">
+                                    <li id="cartSubTotalPrice">Subtotal <span>${{ cart.get_subtotal }}</span></li>
+                                    {% if request.session.coupon_id %}
+                                    <li>Coupon <span>%{{ cart.coupon.discount }} (<span id="cartDiscount">${{ cart.get_discount }}</span>)</span>
+                                    </li>
+                                    {% endif %}
+                                    <li>Total <span id="cartTotalPrice">${{ cart.get_total }}</span></li>
+                                </ul>
+                                <a class="btn-tp-2" href="{% url 'order:checkout' %}">Proceed to checkout</a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+{% endblock %}

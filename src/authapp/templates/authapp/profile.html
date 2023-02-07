@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<main>
+    <!-- signin__area start -->
+    <section class="checkout-area pb-30 mt-70">
+        <div class="container">
+            <form method="post">
+                {% csrf_token%}
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="checkbox-form">
+                            <h3>Account</h3>
+                            <div class="row">
+                                {% for field in form %}
+                                <div class="col-md-6">
+                                    <div class="checkout-form-list">
+                                        <label>{{ field.label | title }}&nbsp;{% if field.field.required %}<span
+                                                class="required">*</span>{% endif %}</label>
+                                        {{ field }}
+                                        {{ field.errors}}
+                                    </div>
+
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <div class="pro-cart-btn">
+                            <button class="add-cart-btn mb-20">Save</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </section>
+    <!-- signin__area end -->
+
+    <section class="checkout-area pb-85 mt-30">
+        <div class="container">
+            <form method="post">
+                {% csrf_token%}
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="checkbox-form">
+                            <h3>Your Orders</h3>
+                            {% if not orders %}
+                                <span>Your order history will be displayed here</span>
+                            {% else %}
+                                <div class="your-order-table table-responsive">
+                                    <table>
+                                        <thead>
+                                        <tr>
+                                            <th class="product-name">Date</th>
+                                            <th class="product-total">Total</th>
+                                            <th class="product-total">Status</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for item in orders %}
+                                                <tr class="cart_item pointer">
+                                                    <td class="product-name">
+                                                        <strong class="product-quantity">
+                                                            &nbsp;{{ item.created |date:"d.m.y" }}</strong>
+                                                    </td>
+                                                    <td class="product-total">
+                                                        <span class="amount">${{ item.get_total }}</span>
+                                                    </td>
+                                                    <td class="product-total">
+                                                        <span class="amount">{{ item.status | capfirst }}</span>
+                                                    </td>
+                                                </tr>
+                                            {% endfor %}
+                                    </table>
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </section>
+</main>
+{% endblock%}
+

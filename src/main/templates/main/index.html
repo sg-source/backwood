@@ -1,0 +1,865 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block header %}
+<header>
+    <div class="header__area">
+        <div class="header__top black-bg d-none d-md-block">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xxl-12">
+                        <div class="header__top-info text-center">
+                            <ul>
+                                <li>
+                                    <p>5% for all order in this week <a href="{% url 'main:shop' %}">Shop Now</a></p>
+                                </li>
+                                <li>
+                                    <p><a>Free delivery for all orders over <span>$200</span></a></p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="header__middle header__border d-none d-md-block">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-xxl-6 col-xl-6 col-lg-8 col-md-8">
+                        <div class="header__social">
+                            <ul>
+                                <li><a href="tel:1234-5678-90"><i class="fal fa-headphones"></i> (+80) 1234 5678 90</a>
+                                </li>
+                                <li><a href="mailto:info@company.com"><i class="fal fa-envelope"></i>
+                                    info@company.com</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-xxl-6 col-xl-6 col-lg-4 col-md-4">
+                        <div class="header__middle-right d-flex align-items-center justify-content-end">
+                            <div class="main-menu main-menu-border main-menu-4">
+                                <a href="{% url 'main:about' %}">About Us</a>
+                                <a href="{% url 'main:contact' %}">Contacts</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="header__bottom">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-xxl-2 col-xl-2 col-lg-3 col-6">
+                        <div class="logo">
+                            <a href="{% url 'main:index' %}">
+                                <img src="{% static 'assets/img/logo/logo.png' %}" alt="logo">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-xxl-6 col-xl-6 col-lg-8 d-none d-lg-block">
+                        <div class="category__menu d-flex align-items-center">
+                            <div class="category__btn mr-20">
+                                <button class="cat-btn" type="button"><i class="far fa-bars"></i>All Categories</button>
+                                <div class="side-submenu transition-3">
+                                    <nav>
+                                        <ul>
+                                            <li class="has-dropdown">
+                                                <a href="{% url 'main:shop_new' %}">
+                                                    <i class="fal fa-headphones"></i>
+                                                    New In
+                                                </a>
+                                                <ul class="mega-menu">
+                                                    <li><a href="{% url 'main:shop_new' %}">New In By Room</a>
+                                                        <ul class="mega-item">
+                                                            {% for item in categories_and_types %}
+                                                            {% if item.entity == 'category' %}
+                                                            <li>
+                                                                <a href="{% url 'main:shop_new' item.slug %}">
+                                                                    {{ item.name | capfirst }}
+                                                                </a>
+                                                            </li>
+                                                            {% endif %}
+                                                            {% endfor %}
+                                                        </ul>
+                                                    </li>
+                                                    <li><a href="{% url 'main:shop_new' %}">New In By Type</a>
+                                                        <ul class="mega-item">
+                                                            {% for item in categories_and_types %}
+                                                            {% if item.entity == 'product type' %}
+                                                            <li>
+                                                                <a href="{% url 'main:shop_new' item.slug %}">
+                                                                    {{ item.name | capfirst }}
+                                                                </a>
+                                                            </li>
+                                                            {% endif %}
+                                                            {% endfor %}
+                                                            </li>
+                                                        </ul>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                            <li class="has-dropdown">
+                                                <a href="{% url 'main:shop' %}">
+                                                    <i class="fal fa-home"></i>
+
+                                                    Shop by Room
+                                                </a>
+                                                <ul class="submenu">
+                                                    {% for item in categories_and_types %}
+                                                    {% if item.entity == 'category' %}
+                                                    <li>
+                                                        <a href="{% url 'main:shop' item.slug %}">
+                                                            {{ item.name | capfirst }}
+                                                        </a>
+                                                    </li>
+                                                    {% endif %}
+                                                    {% endfor %}
+                                                </ul>
+                                            </li>
+                                            <li>
+                                                <a href="{% url 'main:shop_sale' %}">
+                                                    <i class="fal fa-alarm-clock"></i>
+                                                    Sales
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="{% url 'main:shop' 'accessories' %}">
+                                                    <i class="fa fa-shopping-bag" aria-hidden="true"></i>
+                                                    Accessories
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </nav>
+                                </div>
+                            </div>
+                            <nav>
+                                <ul>
+                                    {% for item in categories_and_types %}
+                                    {% if item.entity == 'product type' and item.name != 'accessories' %}
+                                    <li>
+                                        <a href="{% url 'main:shop' item.slug %}">{{ item.name | title }}</a>
+                                    </li>
+                                    {% endif %}
+                                    {% endfor%}
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                    <div class="col-xxl-4 col-xl-4 col-lg-1 col-6">
+                        <div class="header__bottom-right-wrapper d-flex justify-content-end align-items-center">
+                            <div class="header__bottom-right d-none d-xl-flex align-items-center justify-content-end">
+                                <div class="header__search">
+                                    <div class="header__search-input">
+                                        <input class="form-control search-input" type="text"
+                                               placeholder="Search anything..">
+                                        <button class="search-button" type="submit"><i id="searchIcon"
+                                                                                       class="far fa-search"></i>
+                                        </button>
+                                        <div class="searched">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="header__bottom-right-render">
+                                    {% include 'main/includes/header_actions.html' %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<div class="cartmini__area">
+    <div class="modal fade" id="cartMiniModal" tabindex="-1" aria-labelledby="cartMiniModal" aria-hidden="true">
+        {% include 'main/includes/minicart.html' %}
+    </div>
+</div>
+
+<div class="body-overlay"></div>
+{% endblock header%}
+
+{% block content %}
+<main>
+    <section class="slider__area">
+        <div class="slider__active swiper-container">
+            <div class="swiper-wrapper">
+                <div class="slider__item slider__height swiper-slide d-flex align-items-center include-bg"
+                     data-background="{% static 'assets/img/slider/slider-1.jpg' %}">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-xxl-5">
+                                <div class="slider__content p-relative z-index-11">
+                                    <span data-animation="fadeInUp" data-delay=".3s">SUMMER ‘23</span>
+                                    <h3 class="slider__title" data-animation="fadeInUp" data-delay=".5s">Office
+                                        Style</h3>
+                                    <div class="slider__btn" data-animation="fadeInUp" data-delay=".4s">
+                                        <a href="{% url 'main:shop' 'office' %}" class="slider-btn">Discover Now <i
+                                                class="fal fa-angle-right"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="slider__item slider__height swiper-slide d-flex align-items-center include-bg"
+                     data-background="{% static 'assets/img/slider/slider-2.jpg' %}">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-xxl-5">
+                                <div class="slider__content p-relative z-index-11">
+                                    <span data-animation="fadeInUp" data-delay=".3s">SUMMER ‘23</span>
+                                    <h3 class="slider__title" data-animation="fadeInUp" data-delay=".5s">Living
+                                        Luxury</h3>
+                                    <div class="slider__btn" data-animation="fadeInUp" data-delay=".4s">
+                                        <a href="{% url 'main:shop' 'living-room' %}" class="slider-btn">Discover Now <i
+                                                class="fal fa-angle-right"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="main-slider-pagination">
+                <button class="main-slider-button-prev"><i class="fal fa-angle-left"></i></button>
+                <button class="main-slider-button-next"><i class="fal fa-angle-right"></i></button>
+            </div>
+        </div>
+    </section>
+
+    <section class="category__area pt-40 grey-bg-3">
+        <div class="container">
+            <div class="row">
+                <div class="col-xxl-12">
+                    <div class="section__title-wrapper section__title-line mb-40">
+                        <h3 class="section__title">See also</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+
+
+                {% for item in random_categories_and_types %}
+                <div class="col-xxl-2 col-xl-2 col-lg-4 col-md-4 col-sm-6">
+                    <div class="category__item mb-30 grey-bg-3">
+                        <div class="category__thumb w-img fix">
+                            <a href="{{ item.absolute_url }}">
+                                <img src="{% get_media_prefix %}{{ item.image }}" alt="">
+                            </a>
+                        </div>
+                        <div class="category__content text-center">
+                            <h3 class="category__title">
+                                <a href="{{ item.absolute_url }}">{{ item.name | capfirst }}</a>
+                            </h3>
+                            <span class="category__quantity">({{ item.count }})</span>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    <section class="product__area pt-95 pb-100">
+        <div class="container">
+            <div class="row">
+                <div class="col-xxl-5 col-xl-6 col-lg-6">
+                    <div class="product__sale-wrapper">
+                        <div class="section__title-wrapper mb-20">
+                            <h3 class="section__title-2">Sale Products</h3>
+                        </div>
+                        <div class="product__sale-slider common-nav owl-carousel">
+                            {% for item in special_sale %}
+                            <div class="product__sale-item p-relative">
+                                <div class="product__sale-thumb w-img fix">
+                                    <a href="{{ item.absolute_url }}">
+                                        <img src="{% get_media_prefix %}{{ item.image }}" alt="">
+                                    </a>
+                                    <div class="product__sale-flash">
+                                        <span>{{ item.sum_discount }}%</span>
+                                    </div>
+                                    <div class="product__action transition-3">
+                                        <ul>
+                                            <li>
+                                                <form class="add-product-form miniproduct-form"
+                                                      action="{% url 'cart:add' item.id %}"
+                                                      method="post">
+                                                    {% csrf_token %}
+                                                    <input type="hidden" name="slug" value="{{ item.slug }}"
+                                                           id="id_slug">
+                                                    <input type="hidden" name="override" value="False" id="id_override">
+                                                    <input type="hidden" name="quantity" value="1" id="id_quantity">
+                                                    <button data-tooltip="">
+                                                        <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                                                    </button>
+                                                </form>
+                                            </li>
+                                            <li>
+                                                <form class="add-wish-product-form"
+                                                      action="{% url 'favourites:add' item.id %}"
+                                                      method="post">
+                                                    {% csrf_token %}
+                                                    <input type="hidden" name="product_id" value="{{ item.id }}"
+                                                           id="product_id">
+                                                    <button>
+                                                        <i class="like-button fa fa-heart {% if item.id in favourites %}
+                                                animate{% endif%}" aria-hidden="true"></i>
+                                                    </button>
+                                                </form>
+                                            </li>
+                                            <li>
+                                                <button data-name="{{ item.slug }}" data-target="#"
+                                                        data-bs-toggle="modal" data-bs-target="#productModalId">
+                                                    <svg viewBox="0 0 22 22">
+                                                        <path d="M11,19c-6.53,0-10.42-7.23-10.58-7.53L0.17,11l0.25-0.47C0.58,10.23,4.47,3,11,3s10.42,7.23,10.58,7.53L21.83,11l-0.25,0.47
+                                            C21.42,11.77,17.53,19,11,19z M2.46,11c0.92,1.49,4.08,6,8.54,6c4.48,0,7.63-4.51,8.54-6C18.62,9.52,15.46,5,11,5
+                                            C6.52,5,3.37,9.51,2.46,11z M11,15c-2.21,0-4-1.79-4-4s1.79-4,4-4s4,1.79,4,4S13.21,15,11,15z M11,9c-1.1,0-2,0.9-2,2s0.9,2,2,2
+                                            s2-0.9,2-2S12.1,9,11,9z"></path>
+                                                    </svg>
+                                                </button>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="product__sale-content text-center">
+                                    <span class="product__sale-tag">
+                                        <a href="{{ item.category.absolute_url }}">{{ item.category.name }}</a>
+                                    </span>
+                                    <h3 class="product__sale-title">
+                                        <a href="{{ item.absolute_url }}">{{ item.name }}</a>
+                                    </h3>
+                                    <div class="product__sale-price">
+                                        <span class="price old-price">${{ item.price }}</span>
+                                        <span class="price new-price">${{ item.get_total_price }}</span>
+                                    </div>
+                                    <div class="product__countdown-wrapper product__border mt-20 pt-20">
+                                        <div class="product__countdown" data-countdown="2025/01/01"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xxl-7 col-xl-6 col-lg-6">
+                    <div class="product__item-wrapper pt-15">
+                        <div class="product__top section__title-line d-sm-flex align-items-start mb-35">
+                            <div class="section__title-wrapper mr-30">
+                                <h3 class="section__title">Special Offer</h3>
+                            </div>
+                            <div class="product__tab">
+                                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                    <li class="nav-item" role="presentation">
+                                        <button class="nav-link active" id="new-tab" data-bs-toggle="tab"
+                                                data-bs-target="#new" type="button" role="tab" aria-controls="new"
+                                                aria-selected="true">New
+                                        </button>
+                                    </li>
+                                    <li class="nav-item" role="presentation">
+                                        <button class="nav-link" id="featured-tab" data-bs-toggle="tab"
+                                                data-bs-target="#featured" type="button" role="tab"
+                                                aria-controls="featured" aria-selected="false">Featured
+                                        </button>
+                                    </li>
+                                    <li class="nav-item" role="presentation">
+                                        <button class="nav-link" id="top-tab" data-bs-toggle="tab" data-bs-target="#top"
+                                                type="button" role="tab" aria-controls="top" aria-selected="false">Top
+                                            Sellers
+                                        </button>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="product__tab-content">
+                            <div class="tab-content" id="myTabContent">
+                                <div class="tab-pane fade show active" id="new" role="tabpanel"
+                                     aria-labelledby="new-tab">
+                                    <div class="product__item-slider common-nav owl-carousel">
+                                        {% for item in special_new %}
+                                        <div class="product__item-single">
+                                            {% for product in item %}
+                                            <div class="product__item mb-20">
+                                                <div class="product__thumb w-img fix">
+                                                    <a href="{{ product.absolute_url }}">
+                                                        <img src="{% get_media_prefix %}{{ product.image }}" alt="">
+                                                    </a>
+                                                    <div class="product__action transition-3">
+                                                        <ul>
+                                                            <li>
+                                                                <form class="add-product-form miniproduct-form"
+                                                                      action="{% url 'cart:add' product.id %}"
+                                                                      method="post">
+                                                                    {% csrf_token %}
+                                                                    <input type="hidden" name="slug"
+                                                                           value="{{ product.slug }}" id="id_slug">
+                                                                    <input type="hidden" name="override" value="False"
+                                                                           id="id_override">
+                                                                    <input type="hidden" name="quantity" value="1"
+                                                                           id="id_quantity">
+                                                                    <button data-tooltip="">
+                                                                        <i class="fa fa-shopping-cart"
+                                                                           aria-hidden="true"></i>
+                                                                    </button>
+                                                                </form>
+                                                            </li>
+                                                            <li>
+                                                                <form class="add-wish-product-form"
+                                                                      action="{% url 'favourites:add' product.id %}"
+                                                                      method="post">
+                                                                    {% csrf_token %}
+                                                                    <input type="hidden" name="product_id"
+                                                                           value="{{ product.id }}" id="product_id">
+                                                                    <button>
+                                                                        <i class="like-button fa fa-heart {% if product.id in favourites %}
+                                                animate{% endif%}" aria-hidden="true"></i>
+                                                                    </button>
+                                                                </form>
+                                                            </li>
+                                                            <li>
+                                                                <button data-name="{{ product.slug }}" data-target="#"
+                                                                        data-bs-toggle="modal"
+                                                                        data-bs-target="#productModalId">
+                                                                    <svg viewBox="0 0 22 22">
+                                                                        <path d="M11,19c-6.53,0-10.42-7.23-10.58-7.53L0.17,11l0.25-0.47C0.58,10.23,4.47,3,11,3s10.42,7.23,10.58,7.53L21.83,11l-0.25,0.47
+                                            C21.42,11.77,17.53,19,11,19z M2.46,11c0.92,1.49,4.08,6,8.54,6c4.48,0,7.63-4.51,8.54-6C18.62,9.52,15.46,5,11,5
+                                            C6.52,5,3.37,9.51,2.46,11z M11,15c-2.21,0-4-1.79-4-4s1.79-4,4-4s4,1.79,4,4S13.21,15,11,15z M11,9c-1.1,0-2,0.9-2,2s0.9,2,2,2
+                                            s2-0.9,2-2S12.1,9,11,9z"></path>
+                                                                    </svg>
+                                                                </button>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <div class="product__content text-center">
+                                                    <div class="product__tag">
+                                                        <span>
+                                                            <a href="{{ product.category.absolute_url }}">{{ product.category.name }}</a>
+                                                        </span>
+                                                    </div>
+                                                    <h3 class="product__title">
+                                                        <a href="{{ product.absolute_url }}">{{ product.name }}</a>
+                                                    </h3>
+                                                    <div class="product__price">
+                                                        <span class="price">${{ product.get_total_price }}</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            {% endfor %}
+                                        </div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+
+                                <div class="tab-pane fade show" id="featured" role="tabpanel"
+                                     aria-labelledby="new-tab">
+                                    <div class="product__item-slider common-nav owl-carousel">
+                                        {% for item in special_new %}
+                                        <div class="product__item-single">
+                                            {% for product in item %}
+                                            <div class="product__item mb-20">
+                                                <div class="product__thumb w-img fix">
+                                                    <a href="{{ product.absolute_url }}">
+                                                        <img src="{% get_media_prefix %}{{ product.image }}" alt="">
+                                                    </a>
+                                                    <div class="product__action transition-3">
+                                                        <ul>
+                                                            <li>
+                                                                <form class="add-product-form miniproduct-form"
+                                                                      action="{% url 'cart:add' product.id %}"
+                                                                      method="post">
+                                                                    {% csrf_token %}
+                                                                    <input type="hidden" name="slug"
+                                                                           value="{{ product.slug }}" id="id_slug">
+                                                                    <input type="hidden" name="override" value="False"
+                                                                           id="id_override">
+                                                                    <input type="hidden" name="quantity" value="1"
+                                                                           id="id_quantity">
+                                                                    <button data-tooltip="">
+                                                                        <i class="fa fa-shopping-cart"
+                                                                           aria-hidden="true"></i>
+                                                                    </button>
+                                                                </form>
+                                                            </li>
+                                                            <li>
+                                                                <form class="add-wish-product-form"
+                                                                      action="{% url 'favourites:add' product.id %}"
+                                                                      method="post">
+                                                                    {% csrf_token %}
+                                                                    <input type="hidden" name="product_id"
+                                                                           value="{{ product.id }}" id="product_id">
+                                                                    <button>
+                                                                        <i class="like-button fa fa-heart {% if product.id in favourites %}
+                                                animate{% endif%}" aria-hidden="true"></i>
+                                                                    </button>
+                                                                </form>
+                                                            </li>
+                                                            <li>
+                                                                <button data-name="{{ product.slug }}" data-target="#"
+                                                                        data-bs-toggle="modal"
+                                                                        data-bs-target="#productModalId">
+                                                                    <svg viewBox="0 0 22 22">
+                                                                        <path d="M11,19c-6.53,0-10.42-7.23-10.58-7.53L0.17,11l0.25-0.47C0.58,10.23,4.47,3,11,3s10.42,7.23,10.58,7.53L21.83,11l-0.25,0.47
+                                            C21.42,11.77,17.53,19,11,19z M2.46,11c0.92,1.49,4.08,6,8.54,6c4.48,0,7.63-4.51,8.54-6C18.62,9.52,15.46,5,11,5
+                                            C6.52,5,3.37,9.51,2.46,11z M11,15c-2.21,0-4-1.79-4-4s1.79-4,4-4s4,1.79,4,4S13.21,15,11,15z M11,9c-1.1,0-2,0.9-2,2s0.9,2,2,2
+                                            s2-0.9,2-2S12.1,9,11,9z"></path>
+                                                                    </svg>
+                                                                </button>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <div class="product__content text-center">
+                                                    <div class="product__tag">
+                                                        <span>
+                                                            <a href="{{ product.category.absolute_url }}">{{ product.category.name }}</a>
+                                                        </span>
+                                                    </div>
+                                                    <h3 class="product__title">
+                                                        <a href="{{ product.absolute_url }}">{{ product.name }}</a>
+                                                    </h3>
+                                                    <div class="product__price">
+                                                        <span class="price">${{ product.get_total_price }}</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            {% endfor %}
+                                        </div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade show" id="top" role="tabpanel"
+                                     aria-labelledby="new-tab">
+                                    <div class="product__item-slider common-nav owl-carousel">
+                                        {% for item in special_new %}
+                                        <div class="product__item-single">
+                                            {% for product in item %}
+                                            <div class="product__item mb-20">
+                                                <div class="product__thumb w-img fix">
+                                                    <a href="{{ product.absolute_url }}">
+                                                        <img src="{% get_media_prefix %}{{ product.image }}" alt="">
+                                                    </a>
+                                                    <div class="product__action transition-3">
+                                                        <ul>
+                                                            <li>
+                                                                <form class="add-product-form miniproduct-form"
+                                                                      action="{% url 'cart:add' product.id %}"
+                                                                      method="post">
+                                                                    {% csrf_token %}
+                                                                    <input type="hidden" name="slug"
+                                                                           value="{{ product.slug }}" id="id_slug">
+                                                                    <input type="hidden" name="override" value="False"
+                                                                           id="id_override">
+                                                                    <input type="hidden" name="quantity" value="1"
+                                                                           id="id_quantity">
+                                                                    <button data-tooltip="">
+                                                                        <i class="fa fa-shopping-cart"
+                                                                           aria-hidden="true"></i>
+                                                                    </button>
+                                                                </form>
+                                                            </li>
+                                                            <li>
+                                                                <form class="add-wish-product-form"
+                                                                      action="{% url 'favourites:add' product.id %}"
+                                                                      method="post">
+                                                                    {% csrf_token %}
+                                                                    <input type="hidden" name="product_id"
+                                                                           value="{{ product.id }}" id="product_id">
+                                                                    <button>
+                                                                        <i class="like-button fa fa-heart {% if product.id in favourites %}
+                                                animate{% endif%}" aria-hidden="true"></i>
+                                                                    </button>
+                                                                </form>
+                                                            </li>
+                                                            <li>
+                                                                <button data-name="{{ product.slug }}" data-target="#"
+                                                                        data-bs-toggle="modal"
+                                                                        data-bs-target="#productModalId">
+                                                                    <svg viewBox="0 0 22 22">
+                                                                        <path d="M11,19c-6.53,0-10.42-7.23-10.58-7.53L0.17,11l0.25-0.47C0.58,10.23,4.47,3,11,3s10.42,7.23,10.58,7.53L21.83,11l-0.25,0.47
+                                            C21.42,11.77,17.53,19,11,19z M2.46,11c0.92,1.49,4.08,6,8.54,6c4.48,0,7.63-4.51,8.54-6C18.62,9.52,15.46,5,11,5
+                                            C6.52,5,3.37,9.51,2.46,11z M11,15c-2.21,0-4-1.79-4-4s1.79-4,4-4s4,1.79,4,4S13.21,15,11,15z M11,9c-1.1,0-2,0.9-2,2s0.9,2,2,2
+                                            s2-0.9,2-2S12.1,9,11,9z"></path>
+                                                                    </svg>
+                                                                </button>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <div class="product__content text-center">
+                                                    <div class="product__tag">
+                                                        <span>
+                                                            <a href="{{ product.category.absolute_url }}">{{ product.category.name }}</a>
+                                                        </span>
+                                                    </div>
+                                                    <h3 class="product__title">
+                                                        <a href="{{ product.absolute_url }}">{{ product.name }}</a>
+                                                    </h3>
+                                                    <div class="product__price">
+                                                        <span class="price">${{ product.get_total_price }}</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            {% endfor %}
+                                        </div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="features__area pb-70">
+        <div class="container">
+            <div class="row">
+                <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-6">
+                    <div class="features__item text-center mb-30 features__item-border">
+                        <div class="features__icon">
+                            <i class="flaticon-truck"></i>
+                        </div>
+                        <div class="features__content">
+                            <h3 class="features__title">Free Shipping</h3>
+                            <p>Capped $39 per order</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-6">
+                    <div class="features__item text-center mb-30 features__item-border">
+                        <div class="features__icon">
+                            <i class="flaticon-credit-card"></i>
+                        </div>
+                        <div class="features__content">
+                            <h3 class="features__title">Securety Payments</h3>
+                            <p>Up to 12 months installments</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-6">
+                    <div class="features__item text-center mb-30 features__item-border">
+                        <div class="features__icon">
+                            <i class="flaticon-exchange"></i>
+                        </div>
+                        <div class="features__content">
+                            <h3 class="features__title">14-Day Returns</h3>
+                            <p>Shop with confidence</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-6">
+                    <div class="features__item text-center mb-30">
+                        <div class="features__icon">
+                            <i class="flaticon-call-center-agent"></i>
+                        </div>
+                        <div class="features__content">
+                            <h3 class="features__title">24/7 Support</h3>
+                            <p>Capped $39 per order</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="product__area-trending pb-60">
+        <div class="container">
+            <div class="row">
+                <div class="col-xxl-12">
+                    <div class="product__item-wrapper">
+                        <div class="product__top section__title-line d-sm-flex align-items-start mb-35">
+                            <div class="section__title-wrapper mr-30">
+                                <h3 class="section__title">Be sure to watch this</h3>
+                            </div>
+                            <div class="product__tab">
+                                <ul class="nav nav-tabs" id="myTab2" role="tablist">
+                                    <li class="nav-item" role="presentation">
+                                        <button class="nav-link active" id="new-3-tab" data-bs-toggle="tab"
+                                                data-bs-target="#new-3" type="button" role="tab" aria-controls="new-3"
+                                                aria-selected="true">Recommended for you
+                                        </button>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xxl-12">
+                    <div class="product__tab-content">
+                        <div class="tab-content" id="myTab2Content">
+                            <div class="tab-pane fade show active" id="new-3" role="tabpanel"
+                                 aria-labelledby="new-3-tab">
+                                <div class="product__item-trending-slider common-nav owl-carousel">
+                                    {% for item in bottom_recommended %}
+                                    <div class="product__item mb-20">
+                                        <div class="product__thumb w-img fix">
+                                            <a href="{{ item.absolute_url }}">
+                                                <img src="{% get_media_prefix %}{{ item.image }}" alt="">
+                                            </a>
+                                        </div>
+                                        <div class="product__action transition-3">
+                                            <ul>
+                                                <li>
+                                                    <form class="add-product-form miniproduct-form"
+                                                          action="{% url 'cart:add' item.id %}"
+                                                          method="post">
+                                                        {% csrf_token %}
+                                                        <input type="hidden" name="slug" value="{{ item.slug }}"
+                                                               id="id_slug">
+                                                        <input type="hidden" name="override" value="False"
+                                                               id="id_override">
+                                                        <input type="hidden" name="quantity" value="1" id="id_quantity">
+                                                        <button data-tooltip="">
+                                                            <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                                                        </button>
+                                                    </form>
+                                                </li>
+                                                <li>
+                                                    <form class="add-wish-product-form"
+                                                          action="{% url 'favourites:add' item.id %}"
+                                                          method="post">
+                                                        {% csrf_token %}
+                                                        <input type="hidden" name="product_id" value="{{ item.id }}"
+                                                               id="product_id">
+                                                        <button>
+                                                            <i class="like-button fa fa-heart {% if item.id in favourites %}
+                                                animate{% endif%}" aria-hidden="true"></i>
+                                                        </button>
+                                                    </form>
+                                                </li>
+                                                <li>
+                                                    <button data-name="{{ item.slug }}" data-target="#"
+                                                            data-bs-toggle="modal" data-bs-target="#productModalId">
+                                                        <svg viewBox="0 0 22 22">
+                                                            <path d="M11,19c-6.53,0-10.42-7.23-10.58-7.53L0.17,11l0.25-0.47C0.58,10.23,4.47,3,11,3s10.42,7.23,10.58,7.53L21.83,11l-0.25,0.47
+                                            C21.42,11.77,17.53,19,11,19z M2.46,11c0.92,1.49,4.08,6,8.54,6c4.48,0,7.63-4.51,8.54-6C18.62,9.52,15.46,5,11,5
+                                            C6.52,5,3.37,9.51,2.46,11z M11,15c-2.21,0-4-1.79-4-4s1.79-4,4-4s4,1.79,4,4S13.21,15,11,15z M11,9c-1.1,0-2,0.9-2,2s0.9,2,2,2
+                                            s2-0.9,2-2S12.1,9,11,9z"></path>
+                                                        </svg>
+                                                    </button>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="product__content text-center">
+                                            <div class="product__tag">
+                                                <span>
+                                                    <a href="{{ item.category.absolute_url }}">{{ item.category.name | capfirst }}</a>
+                                                </span>
+                                            </div>
+                                            <h3 class="product__title">
+                                                <a href="{{ item.absolute_url }}">{{ item.name | capfirst }}</a>
+                                            </h3>
+                                            <div class="product__price">
+                                                <span class="price">${{ item.get_total_price }}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="pb-85">
+        <div class="container">
+            {% if recently_viewed %}
+            <div class="row mt-50">
+                <div class="col-xl-12">
+                    <div class="trending__info text-center">
+                        <h5>Recently Viewed</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-40">
+                {% for product in recently_viewed %}
+                <div class="col-xl-3 col-lg-3 col-sm-6">
+                    <div class="product__item mb-20">
+                        <div class="product__thumb w-img fix">
+                            <a href="{{ product.absolute_url }}">
+                                <img src="{% get_media_prefix %}{{ product.image }}" alt="">
+                            </a>
+                            {% if product.is_discount %}
+                            <div class="product__flash-4">
+                                <span class="discount mr-15">{{ product.sum_discount }}%</span>
+                            </div>
+                            {% endif %}
+                            <div class="product__action transition-3">
+                                <ul>
+                                    <li>
+                                        <form class="add-product-form miniproduct-form"
+                                              action="{% url 'cart:add' product.id %}"
+                                              method="post">
+                                            {% csrf_token %}
+                                            <input type="hidden" name="override" value="False"
+                                                   id="id_override">
+                                            <input type="hidden" name="quantity" value="1"
+                                                   id="id_quantity">
+                                            <button data-tooltip="">
+                                                <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                                            </button>
+                                        </form>
+                                    </li>
+                                    <li>
+                                        <form class="add-wish-product-form"
+                                              action="{% url 'favourites:add' product.id %}"
+                                              method="post">
+                                            {% csrf_token %}
+                                            <input type="hidden" name="product_id"
+                                                   value="{{ product.id }}" id="product_id">
+                                            <button>
+                                                <i class="like-button fa fa-heart {% if product.id in favourites %}
+                                                animate{% endif%}" aria-hidden="true"></i>
+                                            </button>
+                                        </form>
+                                    </li>
+                                    <li>
+                                        <button data-name="{{ product.slug }}" data-target="#"
+                                                data-bs-toggle="modal"
+                                                data-bs-target="#productModalId">
+                                            <svg viewBox="0 0 22 22">
+                                                <path d="M11,19c-6.53,0-10.42-7.23-10.58-7.53L0.17,11l0.25-0.47C0.58,10.23,4.47,3,11,3s10.42,7.23,10.58,7.53L21.83,11l-0.25,0.47
+                                            C21.42,11.77,17.53,19,11,19z M2.46,11c0.92,1.49,4.08,6,8.54,6c4.48,0,7.63-4.51,8.54-6C18.62,9.52,15.46,5,11,5
+                                            C6.52,5,3.37,9.51,2.46,11z M11,15c-2.21,0-4-1.79-4-4s1.79-4,4-4s4,1.79,4,4S13.21,15,11,15z M11,9c-1.1,0-2,0.9-2,2s0.9,2,2,2
+                                            s2-0.9,2-2S12.1,9,11,9z"></path>
+                                            </svg>
+                                        </button>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="product__content">
+                            <div class="product__tag product__tag-4">
+                                <span>
+                                    <a href="{{ product.category.absolute_url }}">{{ product.category.name }}</a>
+                                </span>
+                            </div>
+                            <h3 class="product__title">
+                                <a href="{{ product.absolute_url }}">{{ product.name | capfirst }}</a>
+                            </h3>
+                            <div class="product__price product__price-4 mb-10">
+                                <span class="price">${{ product.get_total_price }}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            {% endif %}
+        </div>
+    </section>
+</main>
+<div class="modal fade" id="productModalId" tabindex="-1" role="dialog" aria-hidden="true">
+    {% include 'main/includes/miniproduct.html' %}
+</div>
+{% endblock content %}

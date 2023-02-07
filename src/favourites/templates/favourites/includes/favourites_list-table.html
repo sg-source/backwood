@@ -1,0 +1,36 @@
+<h2 class="pb-40">Your wishlist</h2>
+<table class="table">
+    <thead>
+    <tr>
+        <th class="product-thumbnail"></th>
+        <th class="cart-product-name">Product</th>
+        <th class="product-price">Unit Price</th>
+        <th class="product-subtotal">Quantity</th>
+        <th class="product-remove">Remove</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for item in favourites %}
+
+    <tr>
+        <td class="product-thumbnail"><a href="{{ item.get_absolute_url }}"><img
+                src="{{ item.image.url }}" alt=""></a></td>
+        <td class="product-name"><a href="{{ item.get_absolute_url }}">{{ item.name }}</a></td>
+        <td class="product-price"><span class="amount">${{ item.get_total_price }}</span></td>
+        {% if item.quantity > 0 %}
+        <td class="product-subtotal in-stock"><span class="amount">In Stock</span></td>
+        {% else %}
+        <td class="product-subtotal out-stock"><span class="amount">Out of stock</span></td>
+        {% endif %}
+        <td class="product-remove">
+            <form class="remove-wish-product-form" action="{% url 'favourites:remove' item.id %}" method="post">
+                {% csrf_token%}
+                <button><i class="fa fa-times"></i></button>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+    {% endfor %}
+</table>
+
+<a href="/shop/" class="mt-50 b-btn mb-20">go shopping</a>
