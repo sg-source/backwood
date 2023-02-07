@@ -6,20 +6,30 @@ from .models import User
 
 
 class UserRegisterForm(UserCreationForm):
-    firstname = forms.CharField(label='firstname', required=True, widget=forms.TextInput(attrs={'class': 'form-input',
-                                                                                                'autocomplete': 'off'}))
-    email = forms.EmailField(label='email', required=True, widget=forms.TextInput(attrs={'class': 'form-input',
-                                                                                         'autocomplete': 'on',
-                                                                                         'autofocus': 'None',
-                                                                                         'pattern': r'^[a-zA-Z0-9.!#$%&'
-                                                                                                    r'’*+/=?^_`{|}~-]+@'
-                                                                                                    r'[a-zA-Z0-9-]+(?:\
-                                                                                                    .[a-zA-Z0-9-]{2,})',
-                                                                                         'placeholder': 'www@web.com'}))
+    firstname = forms.CharField(
+        label='firstname', required=True,
+        widget=forms.TextInput(attrs={'class': 'form-input',
+                                      'autocomplete': 'off'})
+    )
+    email = forms.EmailField(
+        label='email',
+        required=True,
+        widget=forms.TextInput(attrs={'class': 'form-input',
+                                      'autocomplete': 'on',
+                                      'autofocus': 'None',
+                                      'pattern': r'^[a-zA-Z0-9.!#$%&'
+                                                 r'’*+/=?^_`{|}~-]+@'
+                                                 r'[a-zA-Z0-9-]+(?:\
+                                                 .[a-zA-Z0-9-]{2,})',
+                                      'placeholder': 'www@web.com'})
+    )
     password1 = forms.PasswordInput()
     password2 = forms.PasswordInput()
-    approval = forms.BooleanField(label='I agree to the Terms & Conditions', required=True, initial=True,
-                                  widget=forms.CheckboxInput(attrs={'class': 'form-checkbox-input'}))
+    approval = forms.BooleanField(
+        label='I agree to the Terms & Conditions',
+        required=True, initial=True,
+        widget=forms.CheckboxInput(attrs={'class': 'form-checkbox-input'})
+    )
     
     class Meta:
         model = User
@@ -31,12 +41,18 @@ class UserRegisterForm(UserCreationForm):
 
 
 class UserLoginForm(AuthenticationForm):
-    email = forms.EmailField(label='email', widget=forms.TextInput(attrs={'class': 'form-input',
-                                                                          'autocomplete': 'on'}))
+    email = forms.EmailField(
+        label='email',
+        widget=forms.TextInput(attrs={'class': 'form-input',
+                                      'autocomplete': 'on'})
+    )
     
     password = forms.PasswordInput()
-    remember_me = forms.BooleanField(label='Keep me signed in', required=False, initial=True,
-                                     widget=forms.CheckboxInput(attrs={'class': 'form-checkbox-input'}))
+    remember_me = forms.BooleanField(
+        label='Keep me signed in',
+        required=False, initial=True,
+        widget=forms.CheckboxInput(attrs={'class': 'form-checkbox-input'})
+    )
     
     class Meta:
         model: User
@@ -63,15 +79,30 @@ class UserLoginForm(AuthenticationForm):
 
 
 class UserProfileForm(forms.ModelForm):
-    firstname = forms.CharField(label='firstname', required=True, widget=forms.TextInput(attrs={'class': 'form-input',
-                                                                                                'autocomplete': 'off'}))
-    lastname = forms.CharField(label='lastname', required=False, widget=forms.TextInput(attrs={'class': 'form-input',
-                                                                                               'autocomplete': 'off'}))
-    email = forms.EmailField(label='email', required=True, widget=forms.TextInput(attrs={'class': 'form-input',
-                                                                                         'autocomplete': 'on',
-                                                                                         'autofocus': 'None'}))
-    phone = forms.IntegerField(label='phone', required=False, widget=forms.TextInput(attrs={'autocomplete': 'on',
-                                                                                            'autofocus': 'None'}))
+    firstname = forms.CharField(
+        label='firstname',
+        required=True,
+        idget=forms.TextInput(attrs={'class': 'form-input',
+                                     'autocomplete': 'off'})
+    )
+    lastname = forms.CharField(
+        label='lastname',
+        required=False,
+        widget=forms.TextInput(attrs={'class': 'form-input',
+                                      'autocomplete': 'off'})
+    )
+    email = forms.EmailField(
+        label='email',
+        required=True,
+        widget=forms.TextInput(attrs={'class': 'form-input',
+                                      'autocomplete': 'on',
+                                      'autofocus': 'None'}))
+    phone = forms.IntegerField(
+        label='phone',
+        required=False,
+        widget=forms.TextInput(attrs={'autocomplete': 'on',
+                                      'autofocus': 'None'})
+    )
     
     class Meta:
         model = User

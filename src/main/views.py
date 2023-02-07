@@ -1,17 +1,11 @@
 import datetime
-import random
-from copy import copy, deepcopy
-from itertools import chain
-
 from urllib.parse import parse_qsl
 
 from django.contrib import messages
-from django.contrib.messages.views import SuccessMessageMixin
-from django.db.models import Q, F, Count, Value as V, Case, When, CharField, DecimalField
-from django.http import Http404, HttpResponse, JsonResponse, HttpResponseNotFound
+from django.db.models import Q, F, Count, Value as V
+from django.http import Http404, HttpResponseNotFound
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils.decorators import method_decorator
-from django.utils.safestring import mark_safe
 from django.views.decorators.http import require_safe, require_GET
 from django.views.generic import ListView, DetailView, TemplateView
 from django.views.generic.edit import FormMixin, ProcessFormView
@@ -107,10 +101,10 @@ class ProductsListView(ListView):
             'absolute_url',
             'entity', ) \
             .union(ProductType.active_objects.annotate(entity=V('product type')).values(
-            'name',
-            'slug',
-            'absolute_url',
-            'entity', )
+                'name',
+                'slug',
+                'absolute_url',
+                'entity', )
         )
         
         context['filtered'] = self.filtered
@@ -263,9 +257,6 @@ class ProductDetailsView(FormMixin, DetailView):
             Q(category=self.object.category) |
             Q(product_type=self.object.product_type)).exclude(
             pk=self.object.id).order_by('?')[:5]
-        
-        
-        obj = self.object.sum_discount
         
         context['recommended_products'] = recommended_products
         context['title'] = self.object.name

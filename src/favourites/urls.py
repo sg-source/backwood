@@ -1,6 +1,5 @@
 from django.urls import path
 
-from . import views
 from .views import FavouritesDetailView, FavouritesUpdateView, FavouritesRemoveView
 
 app_name = 'favourites'

@@ -1,18 +1,14 @@
 """Main models for app"""
-from abc import abstractmethod
 from datetime import datetime, timedelta
 from decimal import Decimal
-from itertools import chain
-from typing import List
 import random
 
-from django.db.models import Q, Case, When, Value as V, BooleanField, F, DecimalField
-from django.db.models.signals import post_save
-from django.dispatch import receiver
+from django.db.models import Q, Case, When, Value as V, BooleanField
 from django.utils.safestring import mark_safe
 from django.db import models
 from django.urls import reverse
 from django.utils.text import slugify
+
 
 COLOURS = (
     ('#BEBEBE', 'grey'),
@@ -204,13 +200,13 @@ class ProductCategory(models.Model):
     absolute_url = models.URLField(
         verbose_name='absolute url',
         blank=True,
-        null=True
+        null=True,
     )
     name = models.CharField(
         verbose_name='name',
         blank=False,
         max_length=40,
-        unique=True
+        unique=True,
     )
     slug = models.SlugField(
         max_length=255,
@@ -221,29 +217,29 @@ class ProductCategory(models.Model):
     image = models.ImageField(
         upload_to='products_categories',
         blank=True,
-        null=True
+        null=True,
     )
     description = models.CharField(
         verbose_name='description',
         max_length=128,
-        blank=True
+        blank=True,
     )
     notes = models.CharField(
         verbose_name='notes',
         max_length=64,
-        blank=True
+        blank=True,
     )
     created_at = models.DateTimeField(
         verbose_name='created at',
-        auto_now_add=True
+        auto_now_add=True,
     )
     updated_at = models.DateTimeField(
         verbose_name='updated at',
-        auto_now=True
+        auto_now=True,
     )
     is_active = models.BooleanField(
         verbose_name='active',
-        default=True
+        default=True,
     )
     
     objects = models.Manager()
@@ -284,50 +280,50 @@ class ProductType(models.Model):
     absolute_url = models.URLField(
         verbose_name='absolute url',
         blank=True,
-        null=True
+        null=True,
     )
     name = models.CharField(
         verbose_name='name',
         blank=False,
         unique=True,
-        max_length=40
+        max_length=40,
     )
     name_singular = models.CharField(
         verbose_name='name singular',
         blank=False,
         unique=True,
-        max_length=40
+        max_length=40,
     )
     slug = models.SlugField(
         max_length=255,
         unique=True,
         db_index=True,
-        verbose_name='url'
+        verbose_name='url',
     )
     image = models.ImageField(
-        upload_to='products_types'
+        upload_to='products_types',
     )
     description = models.CharField(
         verbose_name='description',
         max_length=128,
-        blank=True
+        blank=True,
     )
     notes = models.CharField(
         verbose_name='notes',
         max_length=64,
-        blank=True
+        blank=True,
     )
     created_at = models.DateTimeField(
         verbose_name='created at',
-        auto_now_add=True
+        auto_now_add=True,
     )
     updated_at = models.DateTimeField(
         verbose_name='updated at',
-        auto_now=True
+        auto_now=True,
     )
     is_active = models.BooleanField(
         verbose_name='active',
-        default=True
+        default=True,
     )
     
     objects = models.Manager()
@@ -367,54 +363,54 @@ class ProductType(models.Model):
 class ProductSubType(models.Model):
     product_type = models.ForeignKey(
         ProductType,
-        on_delete=models.CASCADE
+        on_delete=models.CASCADE,
     )
     absolute_url = models.URLField(
         verbose_name='absolute url',
         blank=True,
-        null=True
+        null=True,
     )
     name = models.CharField(
         verbose_name='name',
         blank=False,
         unique=True,
-        max_length=40
+        max_length=40,
     )
     name_singular = models.CharField(
         verbose_name='name singular',
         blank=False,
         unique=True,
-        max_length=40
+        max_length=40,
     )
     slug = models.SlugField(
         max_length=255,
         unique=True,
-        db_index=True, verbose_name='url'
+        db_index=True, verbose_name='url',
     )
     image = models.ImageField(
         upload_to='products_subtypes',
-        blank=True
+        blank=True,
     )
     description = models.CharField(
         verbose_name='description', max_length=128,
-        blank=True
+        blank=True,
     )
     notes = models.CharField(
         verbose_name='notes',
         max_length=64,
-        blank=True
+        blank=True,
     )
     created_at = models.DateTimeField(
         verbose_name='created at',
-        auto_now_add=True
+        auto_now_add=True,
     )
     updated_at = models.DateTimeField(
         verbose_name='updated at',
-        auto_now=True
+        auto_now=True,
     )
     is_active = models.BooleanField(
         verbose_name='active',
-        default=True
+        default=True,
     )
     
     objects = models.Manager()
@@ -432,30 +428,30 @@ class Product(models.Model):
     category = models.ForeignKey(
         ProductCategory,
         on_delete=models.SET_NULL,
-        null=True
+        null=True,
     )
     product_type = models.ForeignKey(
         ProductType,
         on_delete=models.SET_NULL,
-        null=True
+        null=True,
     )
     product_sub_type = models.ForeignKey(
         ProductSubType,
         on_delete=models.SET_NULL,
         null=True,
-        blank=True
+        blank=True,
     )
     absolute_url = models.URLField(
         verbose_name='absolute url',
         blank=True,
-        null=True
+        null=True,
     )
     sku = models.CharField(
         verbose_name='SKU',
         blank=True,
         unique=True,
         max_length=124,
-        editable=False
+        editable=False,
     )
     name = models.CharField(
         verbose_name='name',
@@ -467,113 +463,114 @@ class Product(models.Model):
         unique=True,
         db_index=True,
         verbose_name='url',
-        editable=False
+        editable=False,
     )
     created_at = models.DateTimeField(
         verbose_name='created at',
-        auto_now_add=True
+        auto_now_add=True,
     )
     updated_at = models.DateTimeField(
         verbose_name='updated at',
-        auto_now=True
+        auto_now=True,
     )
     image = models.ImageField(
         upload_to='products_images',
         blank=True,
-        null=True
+        null=True,
     )
     image_second = models.ImageField(
         upload_to='products_images',
         blank=True,
-        null=True
+        null=True,
     )
     colour = models.CharField(
         max_length=40,
         choices=COLOURS,
         blank=True,
-        null=True
+        null=True,
     )
     price = models.DecimalField(
         verbose_name='price',
         max_digits=8,
         decimal_places=2,
         blank=True,
-        null=True
+        null=True,
     )
     is_discount = models.BooleanField(
         verbose_name='discount',
         default=False,
         blank=True,
-        null=True
+        null=True,
     )
     sum_discount = models.PositiveIntegerField(
         verbose_name='sum discount',
         choices=DISCOUNTS,
         blank=True,
-        null=True
+        null=True,
     )
     quantity = models.PositiveIntegerField(
         verbose_name='quantity',
         blank=True,
-        null=True
+        null=True,
     )
     is_active = models.BooleanField(
         verbose_name='active',
         default=True,
         blank=True,
-        null=True
+        null=True,
     )
     short_description = models.TextField(
         verbose_name='short description',
         max_length=200,
         blank=True,
-        null=True
+        null=True,
     )
     description = models.TextField(
         verbose_name='description',
         max_length=960,
         blank=True,
-        null=True
+        null=True,
     )
     notes = models.CharField(
         verbose_name='notes',
         max_length=64,
         blank=True,
-        null=True
+        null=True,
     )
     product_dimensions = models.CharField(
         verbose_name='product dimensions',
         max_length=40,
         blank=True,
-        null=True
+        null=True,
     )
     weight = models.PositiveIntegerField(
         verbose_name='weight',
         blank=True,
-        null=True)
+        null=True,
+    )
     packaging_dimensions = models.CharField(
         verbose_name='packaging dimensions',
         max_length=128,
         blank=True,
-        null=True
+        null=True,
     )
     country = models.CharField(
         verbose_name='country',
         choices=COUNTRYS,
         max_length=40,
         blank=True,
-        null=True
+        null=True,
     )
     warranty = models.PositiveIntegerField(
         verbose_name='warranty in month',
         choices=WARRANTY,
         blank=True,
-        null=True
+        null=True,
     )
     recommended_load = models.PositiveIntegerField(
         verbose_name='recommended load',
         blank=True,
-        null=True
+        null=True,
     )
     
     objects = models.Manager()

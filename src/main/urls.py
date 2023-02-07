@@ -31,3 +31,4 @@ urlpatterns = [
     path('contact/', views.ContactView.as_view(extra_context={'title': 'Our Contacts'}), name='contact'),
     path('search/', views.SearchProductsView.as_view(), name='search'),
 ]
+
