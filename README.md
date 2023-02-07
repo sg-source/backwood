@@ -27,6 +27,7 @@
     - Queries optimization
     - Deleting duplicated and similar queries
     - Selecting only the required fields for each certain case and the other
+- There is limit on products quantity in the cart and showing exception, if a product is no longer in stock in desired quantity 
 
 and much more
 
