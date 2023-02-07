@@ -3,7 +3,7 @@ from urllib.parse import parse_qsl
 
 from django.contrib import messages
 from django.db.models import Q, F, Count, Value as V
-from django.http import Http404, HttpResponseNotFound
+from django.http import Http404, HttpResponseNotFound, JsonResponse
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils.decorators import method_decorator
 from django.views.decorators.http import require_safe, require_GET
@@ -283,12 +283,13 @@ class ContactView(ProcessFormView, FormMixin, TemplateView):
         return initial
     
     def post(self, request, *args, **kwargs):
-        form = self.get_form()
-        if form.is_valid():
-            messages.success(request, 'Your letter has been sent. We will definitely contact you soon.')
-            return render(request, 'main/includes/messages.html')
-        else:
-            return self.form_invalid(form)
+        if request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest':
+            form = self.get_form()
+            if form.is_valid():
+                messages.success(request, 'Your letter has been sent. We will definitely contact you soon.')
+                return render(request, 'main/includes/messages.html')
+            else:
+                return JsonResponse(data={'err': form.errors})
 
 
 @method_decorator(require_GET, name='dispatch')

@@ -609,10 +609,10 @@ $(document).on('submit', '.remove-wish-product-form', function(e){
     });
 });
 
-$(document).on('submit', '#contacts-form', function(e){
+$('#contacts-form').on('submit', function(e){
     e.preventDefault()
     var url = window.location.pathname
-
+    console.log($(this).serialize())
     $.ajax({
         url: url,
         type: 'POST',

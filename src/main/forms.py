@@ -18,8 +18,8 @@ class ContactForm(forms.Form):
         label='phone',
         required=True,
         error_messages={'invalid': 'Enter a valid phone'},
-        widget=forms.TextInput(attrs={'autocomplete': 'on',
-                                      'placeholder': 'Phone', })
+        widget=forms.NumberInput(attrs={'autocomplete': 'on',
+                                        'placeholder': 'Phone', })
     )
     subject = forms.CharField(
         label='subject',

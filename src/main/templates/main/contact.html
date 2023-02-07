@@ -44,7 +44,8 @@
                     </div>
                 </div>
                 <div class="col-xxl-7 col-xl-6 col-lg-6">
-                    <form id="contacts-form" class="conatct-post-form">
+                    <form id="contacts-form" method="post" class="conatct-post-form">
+                        {% csrf_token %}
                         <div class="row">
                             <div class="col-xl-6 col-lg-6 col-md-6">
                                 <div class="contact-icon p-relative contacts-name">
