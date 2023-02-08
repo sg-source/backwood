@@ -8,7 +8,11 @@
 ###### Admin user is available as `admin@admin.com:admin` right after running
 
 ### Welcome
- ![Backwood](/web/GH/backwood.png)
+
+[//]: # ( ![Backwood]&#40;/web/GH/backwood.png&#41;)
+<br>
+<img src="./wev/GH/backwood.gif" alt="Backwood">
+
 
 ### What was done
 - User registration & authentication
