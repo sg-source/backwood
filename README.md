@@ -9,9 +9,8 @@
 
 ### Welcome
 
-![Backwood]&#40;/web/GH/backwood.png&#41
+![Backwood](/web/GH/backwood.png)
 
-![Backwood](/wev/GH/backwood.png)
 
 
 ### What was done
