@@ -11,8 +11,7 @@
 
 [//]: # ( ![Backwood]&#40;/web/GH/backwood.png&#41;)
 
-[![alt text](./wev/GH/backwood.gif "Logo")]
-<img src="./wev/GH/backwood.gif" alt="Backwood">
+[![alt text](./wev/GH/backwood.png "Backwood")]
 
 
 ### What was done
