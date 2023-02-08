@@ -11,7 +11,7 @@
 
 [//]: # ( ![Backwood]&#40;/web/GH/backwood.png&#41;)
 
-![Backwood](/wev/GH/backwood.png")
+![Backwood](/wev/GH/backwood.png)
 
 
 ### What was done
