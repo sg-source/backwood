@@ -23,7 +23,8 @@ services:
     hostname: nginx
     #command: bash -c "apt-get update && apt-get install -y curl && apt-get install -y iputils-ping && apt-get install -y vim"
     ports:
-      - "8000:80"
+      - "80:80"
+      - "443:443"
     depends_on:
       - app
     volumes:
