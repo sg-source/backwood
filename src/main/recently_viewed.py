@@ -1,6 +1,6 @@
 from django.db.models import Q
 
-from backwood import settings
+from backwood import settings_base as settings
 from main.models import Product
 
 

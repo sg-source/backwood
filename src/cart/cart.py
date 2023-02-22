@@ -1,7 +1,7 @@
 import copy
 from decimal import Decimal
 
-from backwood import settings
+from backwood import settings_base as settings
 from coupon.models import Coupon
 from main.models import Product
 from main.exceptions import ProductOutOfStockError, MaxCartItemError
@@ -52,7 +52,6 @@ class Cart:
     
     def add(self, product: Product, quantity=1, override_quantity=False):
         product_id = str(product.id)
-
         if product_id not in self.cart:
             self.cart[product_id] = {'quantity': 0,
                                      'price': str(Decimal('{:.2f}'.format(product.get_total_price)))}

@@ -44,10 +44,6 @@ class OrderCreateForm(forms.ModelForm):
         model = Order
         fields = ('firstname', 'lastname', 'email', 'phone', 'address',
                   'postal_code', 'city', 'notes', 'shipping')
-    
-    # def clean_shipping(self):
-    #     data = self.cleaned_data['shipping']
-    #     return data
 
 
 class PaymentForm(forms.Form):
@@ -61,7 +57,8 @@ class PaymentForm(forms.Form):
                                      'autocomplete': 'off',
                                      'pattern': r'[0-9]{4}\s([0-9]{4}\s[0-9]{4}|[0-9]{6})\s[0-9]{4}',
                                      'inputmode': 'numeric',
-                                     'autofocus': 'None'})
+                                     'autofocus': 'None',
+                                     'disabled': 'on'})
                                  )
     expiration = forms.CharField(label='expiration', required=True,
                                  widget=forms.TextInput(attrs={'id': 'expirationdate',
@@ -74,9 +71,8 @@ class PaymentForm(forms.Form):
                                                                  'autocomplete': 'off',
                                                                  'pattern': '[0-9]*',
                                                                  'inputmode': 'numeric',
-                                                                 'autofocus': 'None'}))
+                                                                 'autofocus': 'None',
+                                                                 'disabled': 'on'}))
     
     class Meta:
         fields = ('name', 'cardnumber', 'expiration', 'securitycode')
-
-# $('<tr class="order-total"<th>Coupon</th><td><span>' + response.discount + ' ($' + response.get_discount +'</span></td></tr>' )

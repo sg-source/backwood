@@ -1,0 +1,41 @@
+version: '3.7'
+
+services:
+  app:
+    build:
+      context: ../
+      dockerfile: ./deployment/Dockerfile
+    container_name: app
+    hostname: app
+    #ports:
+      #- '8080:8080'
+    expose: ['8080']
+    env_file:
+      - ../.env/prod.env
+    networks:
+      backend:
+        aliases:
+          - app
+
+  nginx:
+    image: nginx
+    container_name: nginx
+    hostname: nginx
+    #command: bash -c "apt-get update && apt-get install -y curl && apt-get install -y iputils-ping && apt-get install -y vim"
+    ports:
+      - "8000:80"
+    depends_on:
+      - app
+    volumes:
+      #- ${PWD}/ngixn.conf:/etc/nginx/sites-available/nginx.conf
+      - ../static:/var/www/backwood/static/
+      - ../media:/var/www/backwood/media/
+      - ./nginx/app.conf:/etc/nginx/conf.d/default.conf
+    networks:
+        backend:
+          aliases:
+            - nginx
+
+networks:
+  backend:
+    name: backend_network

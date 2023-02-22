@@ -89,7 +89,6 @@ class OrderCheckoutView(CreateView):
                 'order_items': self.object.orders.all(),
                 'title': 'Invoice',
             }
-            print(data['order_items'])
             return render(self.request, 'order/invoice.html', context=data)
         
         return super(ModelFormMixin, self).form_valid(form)

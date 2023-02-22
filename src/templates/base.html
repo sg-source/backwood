@@ -52,6 +52,16 @@
 {% endblock %}
 
 {% block header %}
+{% if header_banner %}
+<div class="header-safeinfo">
+            <span>
+                This is a <strong>test project</strong> by <a href="https://github.com/sg-source" target="_blank">github/sg-source</a>.
+                <strong>It has nothing to do with</strong> a real online store,
+                it's just an explicit demonstration of a project where you can test the functionality.
+            </span>
+    <button id="headerInfoButton" class="mt-30">Got it</button>
+</div>
+{% endif %}
 <header class="d-none d-lg-block">
     <div class="header__area">
         <div class="header__top d-none d-md-block pt-25 pb-25">

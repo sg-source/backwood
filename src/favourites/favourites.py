@@ -1,4 +1,5 @@
-from backwood import settings
+from backwood import settings_base as settings
+
 from main.models import Product
 
 

@@ -173,12 +173,15 @@
                                     {% if request.session.coupon_id %}
                                     <tr class="discount">
                                         <th>Coupon</th>
-                                        <td><span class="amount">%{{ cart.coupon.discount }} (${{ cart.get_discount }})</span></td>
+                                        <td><span
+                                                class="amount">%{{ cart.coupon.discount }} (${{ cart.get_discount }})</span>
+                                        </td>
                                     </tr>
                                     {% endif %}
                                     <tr class="order-total">
                                         <th>Order Total</th>
-                                        <td><strong><span id="orderTotal" class="amount">${{ cart.get_total }}</span></strong>
+                                        <td><strong><span id="orderTotal"
+                                                          class="amount">${{ cart.get_total }}</span></strong>
                                         </td>
                                     </tr>
                                     </tfoot>
@@ -200,6 +203,8 @@
                                             <div class="accordion-body">
                                                 <form method="post">
                                                     <div class="payment-block">
+
+
                                                         <div class="payment-container preload">
                                                             <div class="creditcard">
                                                                 <div class="front">
@@ -319,6 +324,13 @@
                     </g>
                 </svg>
                                                                 </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="payment-safeinfo-wrapper">
+                                                            <div class="payment-safeinfo">
+                                                                <span>This is a <strong>test</strong> payment, it does not provide for the input of real data.
+                                                                    For your safety, input the card number and security code will be blocked.
+                                                                    It can be generated below using the <span class="generate-random-btn">generate random</span> button</span>
                                                             </div>
                                                         </div>
                                                         <div class="form-container">

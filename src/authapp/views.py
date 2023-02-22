@@ -21,6 +21,8 @@ class LoginUser(LoginView):
     
     def form_valid(self, form):
         """Security check complete. Log the user in."""
+        check = get_user_model()
+        print(check)
         super().form_valid(form)
         if not form.cleaned_data.get('remember_me'):
             self.request.session.set_expiry(0)
