@@ -9,25 +9,25 @@ ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS').split(' ')
 CORS_ORIGIN_ALLOW_ALL = False
 
 CSRF_TRUSTED_ORIGINS = [
-    'https://shop.backwood.online',
-    'http://shop.backwood.online',
+    'https://backwood.online',
+    'http://backwood.online',
     'https://84.23.54.118',
     'http://84.23.54.118',
 ]
 
 CORS_ALLOWED_ORIGINS = [
-    'https://shop.backwood.online',
-    'http://shop.backwood.online',
+    'https://backwood.online',
+    'http://backwood.online',
     'https://84.23.54.118',
     'http://84.23.54.118',
 ]
 
-CORS_ORIGIN_WHITELIST = (
-    'https://shop.backwood.online',
-    'http://shop.backwood.online',
-    'https://84.23.54.118',
-    'http://84.23.54.118',
-)
+# CORS_ORIGIN_WHITELIST = (
+#     'https://backwood.online',
+#     'http://backwood.online',
+#     'https://84.23.54.118',
+#     'http://84.23.54.118',
+# )
 
 DATABASES = {
     'default': {
