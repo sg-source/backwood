@@ -1,0 +1,79 @@
+{% load static %}
+
+<section class="offcanvas__area">
+    <div class="modal fade" id="offCanvasModal" tabindex="-1" aria-labelledby="offCanvasModal" style="display: none;"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="offcanvas__wrapper">
+                    <div class="offcanvas__top d-flex align-items-center mb-60 justify-content-between">
+                        <div class="logo">
+                            <a href="{% url 'main:index' %}">
+                                <img src="{% static 'assets/img/logo/logo.png' %}" alt="logo">
+                            </a>
+                        </div>
+                        <div class="offcanvas__close">
+                            <button class="offcanvas__close-btn" data-bs-dismiss="modal"
+                                    data-bs-target="#offCanvasModal">
+                                <svg viewBox="0 0 22 22">
+                                    <path d="M12.41,11l5.29-5.29c0.39-0.39,0.39-1.02,0-1.41s-1.02-0.39-1.41,0L11,9.59L5.71,4.29c-0.39-0.39-1.02-0.39-1.41,0
+                                            s-0.39,1.02,0,1.41L9.59,11l-5.29,5.29c-0.39,0.39-0.39,1.02,0,1.41C4.49,17.9,4.74,18,5,18s0.51-0.1,0.71-0.29L11,12.41l5.29,5.29
+                                            C16.49,17.9,16.74,18,17,18s0.51-0.1,0.71-0.29c0.39-0.39,0.39-1.02,0-1.41L12.41,11z"></path>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                    <!--                    <div class="sidebar__search mb-25">-->
+                    <!--                        <form action="#">-->
+                    <!--                            <input type="text" placeholder="What are you searching for?">-->
+                    <!--                            <button type="submit"><i class="far fa-search"></i></button>-->
+                    <!--                        </form>-->
+                    <!--                    </div>-->
+                    <div class="offcanvas__content p-relative z-index-1">
+                        <div class="canvas__menu">
+                            <div class="mobile-menu fix mean-container">
+                                <div class="mean-bar"><a href="#nav" class="meanmenu-reveal"
+                                                         style="right: 0px; left: auto; display: inline;"><span><span><span></span></span></span></a>
+                                    <nav class="mean-nav">
+                                        <ul style="display: none;">
+                                            <li class="has-dropdown">
+                                                <a href="{% url 'main:index' %}">Home</a>
+                                            </li>
+                                            <li class="has-dropdown">
+                                                <a href="{% url 'main:shop' %}">Shop</a>
+                                            </li>
+                                            <li class="has-dropdown">
+                                                <a href="{% url 'main:about' %}">About</a>
+                                            </li>
+                                            <li class="has-dropdown">
+                                                <a href="{% url 'main:contact' %}">Contacts</a>
+                                            </li>
+                                        </ul>
+                                    </nav>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="offcanvas__action mt-40 mb-15">
+                            {% if user.is_authenticated %}
+                            <a class="login-logout-sidebar" href="{% url 'auth:profile' user.pk %}">My account</a>
+                            <a class="login-logout-sidebar" href="{% url 'auth:logout'%}">Logout</a><br>
+                            {% else %}
+                            <a class="login-logout-sidebar" href="{% url 'auth:login' %}">Login</a><br>
+                            {% endif %}
+                            <div class="cart_and_wish mt-20">
+                                {% include 'main/includes/sidebar_actions.html' %}
+                            </div>
+                        </div>
+                        <div class="offcanvas__social mt-15">
+                            <ul>
+                                <li>
+                                    <a href="https://github.com/sg-source" target="_blank"><i class="fab fa-github"></i></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

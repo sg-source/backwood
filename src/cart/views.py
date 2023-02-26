@@ -55,9 +55,16 @@ class CartUpdateView(FormMixin, ProcessFormView):
                                           'product_total_price': product_total_price}, status=200)
             
             location = request.POST.get('location')
+            sidebar_actions = render_to_string('main/includes/sidebar_actions.html', request=request)
+            
             if location and location == '/':
-                return render(request, 'main/includes/header_actions.html')
-            return render(request, 'main/includes/header.html')
+                header_actions = render_to_string('main/includes/header_actions.html', request=request)
+                return JsonResponse(data={'header_actions': header_actions,
+                                          'sidebar_actions': sidebar_actions})
+
+            header_actions = render_to_string('main/includes/header.html', request=request)
+            return JsonResponse(data={'header_actions': header_actions,
+                                      'sidebar_actions': sidebar_actions})
 
         return JsonResponse(data={'err': 'It is impossible to add the product to the cart'})
     
@@ -86,10 +93,18 @@ class CartRemoveView(DeletionMixin, View):
                     else:
                         empty_cart = render_to_string('cart/includes/empty-cart.html')
                         return JsonResponse({'cart': 'empty', 'empty_cart': empty_cart})
-                
-                if request.POST['location'] and request.POST['location'] != '/':
-                    return render(request, 'main/includes/header.html')
-                return render(request, 'main/includes/header_actions.html')
+
+                location = request.POST.get('location')
+                sidebar_actions = render_to_string('main/includes/sidebar_actions.html', request=request)
+
+                if location and location == '/':
+                    header_actions = render_to_string('main/includes/header_actions.html', request=request)
+                    return JsonResponse(data={'header_actions': header_actions,
+                                              'sidebar_actions': sidebar_actions})
+
+                header_actions = render_to_string('main/includes/header.html', request=request)
+                return JsonResponse(data={'header_actions': header_actions,
+                                          'sidebar_actions': sidebar_actions})
 
 
 class CartDetailView(FormMixin, TemplateView):

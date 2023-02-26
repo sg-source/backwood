@@ -1,82 +1,45 @@
 {% load static %}
-<div class="container">
-    <div class="row align-items-center">
-        <div class="col-xxl-2 col-xl-2 col-lg-2 col-md-6 d-none d-xl-block">
-            <div class="header__top-info">
-                <div class="logo">
-                    <a href="{% url 'main:index' %}"><img src="{% static 'assets/img/logo/logo.png' %}" alt=""></a>
-                </div>
-            </div>
-        </div>
-        <div class="col-xxl-6 col-xl-6 col-lg-8 col-md-6">
-            <div class="header__top-features header__top-features-3">
-                <div class="features__item features__item-2 mr-50">
-                    <div class="features__icon features__icon-2 mr-20">
-                        <i class="flaticon-credit-card"></i>
-                    </div>
-                    <div class="features__content-2">
-                        <h3 class="features__title features__title-3">100% Payments</h3>
-                        <p>Monthly Installment</p>
-                    </div>
-                </div>
-                <div class="features__item features__item-2 features__item-d">
-                    <div class="features__icon features__icon-2 mr-20">
-                        <i class="flaticon-exchange"></i>
-                    </div>
-                    <div class="features__content-2">
-                        <h3 class="features__title features__title-3">14-Day Returns</h3>
-                        <p>Secure Payments</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-6">
-            <div class="header__action header__action-2 text-sm-end">
-                <ul>
-                    <li>
-                        {% if user.is_authenticated %}
-                    <li>
-                        <a href="{% url 'auth:profile' user.pk %}"><i class="fal fa-user-circle"></i></a>
-                    </li>
-                    <li>
-                        <a href="{% url 'auth:logout' %}"><i class="fal fa-sign-out"></i></a>
-                    </li>
-                    {% else %}
-                    <li>
-                        <a href="{% url 'auth:login' %}"><i class="fal fa-sign-in"></i></i></a>
-                    </li>
-                    {% endif %}
+<ul>
+    <li>
+        {% if user.is_authenticated %}
+    <li>
+        <a href="{% url 'auth:profile' user.pk %}"><i class="fal fa-user-circle"></i></a>
+    </li>
+    <li>
+        <a href="{% url 'auth:logout' %}"><i class="fal fa-sign-out"></i></a>
+    </li>
+    {% else %}
+    <li>
+        <a href="{% url 'auth:login' %}"><i class="fal fa-sign-in"></i></i></a>
+    </li>
+    {% endif %}
 
-                    </li>
-                    <li>
-                        <a href="checkout.html">
-                            <i class="flaticon-random-button"></i>
-                        </a>
-                    </li>
-                    {% if request.get_full_path != '/favourites/' %}
-                    <li>
-                        <a href="{% url 'favourites:detail' %}"><i class="fal fa-heart"></i>
-                            {% if favourites %}
-                            <span class="cart-count">{{ favourites_len }}</span>
-                            {% endif %}
-                        </a>
-                    </li>
-                    {% endif %}
-                    {% if request.get_full_path != '/cart/' and request.get_full_path != '/order/checkout/' %}
-                    <li>
-                        <a href="" data-bs-toggle="modal" data-bs-target="#cartMiniModal">
-                            <i class="fal fa-shopping-basket"></i>
-                            {% if cart %}
-                            <span class="cart-count">{{ cart_len }}</span>
-                            {% endif %}
-                        </a>
-                        {% if cart %}
-                        <span class="cart-price">${{ cart.get_total }}</span>
-                        {% endif %}
-                    </li>
-                    {% endif %}
-                </ul>
-            </div>
-        </div>
-    </div>
-</div>
+    </li>
+    <li>
+        <a href="checkout.html">
+            <i class="flaticon-random-button"></i>
+        </a>
+    </li>
+    {% if request.get_full_path != '/favourites/' %}
+    <li>
+        <a href="{% url 'favourites:detail' %}"><i class="fal fa-heart"></i>
+            {% if favourites %}
+            <span class="cart-count">{{ favourites_len }}</span>
+            {% endif %}
+        </a>
+    </li>
+    {% endif %}
+    {% if request.get_full_path != '/cart/' and request.get_full_path != '/order/checkout/' %}
+    <li>
+        <a href="" data-bs-toggle="modal" data-bs-target="#cartMiniModal">
+            <i class="fal fa-shopping-basket"></i>
+            {% if cart %}
+            <span class="cart-count">{{ cart_len }}</span>
+            {% endif %}
+        </a>
+        {% if cart %}
+        <span class="cart-price">${{ cart.get_total }}</span>
+        {% endif %}
+    </li>
+    {% endif %}
+</ul>

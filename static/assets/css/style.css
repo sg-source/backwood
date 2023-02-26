@@ -8453,3 +8453,12 @@ input::-webkit-inner-spin-button {
     color: black;
 }
 
+.mobile-header-area {
+    -webkit-box-shadow: 0px 3px 6px 2px rgba(34, 60, 80, 0.2);
+    -moz-box-shadow: 0px 3px 6px 2px rgba(34, 60, 80, 0.2);
+    box-shadow: 0px 3px 6px 2px rgba(34, 60, 80, 0.2);
+}
+
+.login-logout-sidebar:hover {
+    color: #ff8429;
+}

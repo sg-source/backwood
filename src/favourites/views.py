@@ -1,4 +1,6 @@
+from django.http import JsonResponse
 from django.shortcuts import render, get_object_or_404
+from django.template.loader import render_to_string
 from django.utils.decorators import method_decorator
 from django.views import View
 from django.views.decorators.http import require_POST
@@ -24,9 +26,17 @@ class FavouritesUpdateView(BaseUpdateView):
         product = get_object_or_404(Product, pk=pk)
         if product:
             self.favourites.update(int(product.id))
-            if request.POST['location'] and request.POST['location'] != '/':
-                return render(request, 'main/includes/header.html')
-            return render(request, 'main/includes/header_actions.html')
+            location = request.POST.get('location')
+            sidebar_actions = render_to_string('main/includes/sidebar_actions.html', request=request)
+
+            if location and location == '/':
+                header_actions = render_to_string('main/includes/header_actions.html', request=request)
+                return JsonResponse(data={'header_actions': header_actions,
+                                          'sidebar_actions': sidebar_actions})
+
+            header_actions = render_to_string('main/includes/header.html', request=request)
+            return JsonResponse(data={'header_actions': header_actions,
+                                      'sidebar_actions': sidebar_actions})
         
     def post(self, request, *args, **kwargs):
         return self.update(request, *args, **kwargs)

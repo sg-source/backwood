@@ -65,7 +65,45 @@
 <header class="d-none d-lg-block">
     <div class="header__area">
         <div class="header__top d-none d-md-block pt-25 pb-25">
-            {% include 'main/includes/header.html' %}
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-xxl-2 col-xl-2 col-lg-2 col-md-6 d-none d-xl-block">
+                        <div class="header__top-info">
+                            <div class="logo">
+                                <a href="{% url 'main:index' %}"><img src="{% static 'assets/img/logo/logo.png' %}"
+                                                                      alt=""></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xxl-6 col-xl-6 col-lg-8 col-md-6">
+                        <div class="header__top-features header__top-features-3">
+                            <div class="features__item features__item-2 mr-50">
+                                <div class="features__icon features__icon-2 mr-20">
+                                    <i class="flaticon-credit-card"></i>
+                                </div>
+                                <div class="features__content-2">
+                                    <h3 class="features__title features__title-3">100% Payments</h3>
+                                    <p>Monthly Installment</p>
+                                </div>
+                            </div>
+                            <div class="features__item features__item-2 features__item-d">
+                                <div class="features__icon features__icon-2 mr-20">
+                                    <i class="flaticon-exchange"></i>
+                                </div>
+                                <div class="features__content-2">
+                                    <h3 class="features__title features__title-3">14-Day Returns</h3>
+                                    <p>Secure Payments</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-6">
+                        <div class="header__action header__action-2 text-sm-end">
+                            {% include 'main/includes/header.html' %}
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="header__middle header__border grey-bg-3 d-none d-md-block pt-10 pb-10">
             <div class="container">
@@ -141,7 +179,7 @@
         <div class="row align-items-center">
             <div class="col-6">
                 <div class="mobile-logo">
-                    <a href="index.html"><img src="{% static 'assets/img/logo/logo.png' %}" alt=""></a>
+                    <a href="{% url 'main:index' %}"><img src="{% static 'assets/img/logo/logo.png' %}" alt=""></a>
                 </div>
             </div>
             <div class="col-6">
@@ -175,7 +213,7 @@
                 <div class="offcanvas__wrapper">
                     <div class="offcanvas__top d-flex align-items-center mb-60 justify-content-between">
                         <div class="logo">
-                            <a href="index.html">
+                            <a href="{% url 'main:index' %}">
                                 <img src="{% static 'assets/img/logo/logo.png' %}" alt="logo">
                             </a>
                         </div>
@@ -190,91 +228,32 @@
                             </button>
                         </div>
                     </div>
-                    <div class="sidebar__search mb-25">
-                        <form action="#">
-                            <input type="text" placeholder="What are you searching for?">
-                            <button type="submit"><i class="far fa-search"></i></button>
-                        </form>
-                    </div>
+                    <!--                    TODO fisish search sidebar-->
+                    <!--                    <div class="sidebar__search mb-25">-->
+                    <!--                        <form action="#">-->
+                    <!--                            <input type="text" placeholder="What are you searching for?">-->
+                    <!--                            <button type="submit"><i class="far fa-search"></i></button>-->
+                    <!--                        </form>-->
+                    <!--                    </div>-->
                     <div class="offcanvas__content p-relative z-index-1">
                         <div class="canvas__menu">
                             <div class="mobile-menu fix"></div>
                         </div>
                         <div class="offcanvas__action mt-40 mb-15">
-                            <a href="contact.html">Login</a>
-                            <a href="wishlist.html" class="has-tag">
-                                <svg viewBox="0 0 22 22">
-                                    <path d="M20.26,11.3c2.31-2.36,2.31-6.18-0.02-8.53C19.11,1.63,17.6,1,16,1c0,0,0,0,0,0c-1.57,0-3.05,0.61-4.18,1.71c0,0,0,0,0,0
-                                    L11,3.41l-0.81-0.69c0,0,0,0,0,0C9.06,1.61,7.58,1,6,1C4.4,1,2.89,1.63,1.75,2.77c-2.33,2.35-2.33,6.17-0.02,8.53
-                                    c0,0,0,0.01,0.01,0.01l0.01,0.01c0,0,0,0,0,0c0,0,0,0,0,0L11,20.94l9.25-9.62c0,0,0,0,0,0c0,0,0,0,0,0L20.26,11.3
-                                    C20.26,11.31,20.26,11.3,20.26,11.3z M3.19,9.92C3.18,9.92,3.18,9.92,3.19,9.92C3.18,9.92,3.18,9.91,3.18,9.91
-                                    c-1.57-1.58-1.57-4.15,0-5.73C3.93,3.42,4.93,3,6,3c1.07,0,2.07,0.42,2.83,1.18C8.84,4.19,8.85,4.2,8.86,4.21
-                                    c0.01,0.01,0.01,0.02,0.03,0.03l1.46,1.25c0.07,0.06,0.14,0.09,0.22,0.13c0.01,0,0.01,0.01,0.02,0.01c0.13,0.06,0.27,0.1,0.41,0.1
-                                    c0.08,0,0.16-0.03,0.25-0.05c0.03-0.01,0.07-0.01,0.1-0.02c0.07-0.03,0.13-0.07,0.2-0.11c0.03-0.02,0.07-0.03,0.1-0.06l1.46-1.24
-                                    c0.01-0.01,0.02-0.02,0.03-0.03c0.01-0.01,0.03-0.01,0.04-0.02C13.93,3.42,14.93,3,16,3c0,0,0,0,0,0c1.07,0,2.07,0.42,2.83,1.18
-                                    c1.56,1.58,1.56,4.15,0,5.73c0,0,0,0.01-0.01,0.01c0,0,0,0,0,0L11,18.06L3.19,9.92z"/>
-                                </svg>
-                                <span class="tag">2</span>
-                            </a>
-                            <a href="cart.html" class="has-tag">
-                                <i class="far fa-shopping-bag"></i>
-                                <span class="tag">3</span>
-                            </a>
-                            <div class="header__select header__select-d d-flex align-items-center mt-10">
-                                <div class="header__lang header__select-item mr-15">
-                                    <select>
-                                        <option>EN</option>
-                                        <option>BN</option>
-                                        <option>IN</option>
-                                        <option>CH</option>
-                                        <option>AM</option>
-                                    </select>
-                                    <div class="nice-select" tabindex="0"><span class="current">EN</span>
-                                        <ul class="list list-2">
-                                            <li data-value="EN" class="option selected focus">EN</li>
-                                            <li data-value="BN" class="option">BN</li>
-                                            <li data-value="IN" class="option">IN</li>
-                                            <li data-value="CH" class="option">CH</li>
-                                            <li data-value="AM" class="option">AM</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="header__currency header__select-item">
-                                    <select>
-                                        <option>USD</option>
-                                        <option>Euro</option>
-                                        <option>Yen</option>
-                                        <option>Rupee</option>
-                                        <option>Sterlin</option>
-                                    </select>
-                                    <div class="nice-select" tabindex="0"><span class="current">USD</span>
-                                        <ul class="list list-2">
-                                            <li data-value="USD" class="option selected focus">USD</li>
-                                            <li data-value="Euro" class="option">Euro</li>
-                                            <li data-value="Yen" class="option">Yen</li>
-                                            <li data-value="Rupee" class="option">Rupee</li>
-                                            <li data-value="Sterlin" class="option">Sterlin</li>
-                                        </ul>
-                                    </div>
-                                </div>
+                            {% if user.is_authenticated %}
+                            <a class="login-logout-sidebar" href="{% url 'auth:profile' user.pk %}">My account</a>
+                            <a class="login-logout-sidebar" href="{% url 'auth:logout'%}">Logout</a><br>
+                            {% else %}
+                            <a class="login-logout-sidebar" href="{% url 'auth:login' %}">Login</a><br>
+                            {% endif %}
+                            <div class="cart_and_wish mt-20">
+                                {% include 'main/includes/sidebar_actions.html' %}
                             </div>
                         </div>
                         <div class="offcanvas__social mt-15">
                             <ul>
                                 <li>
-                                    <a href="#"><i class="fab fa-facebook-f"></i></a>
-                                </li>
-                                <li>
-                                    <a href="#"><i class="fab fa-twitter"></i></a>
-                                </li>
-                                <li>
-                                    <a href="#"><i class="fab fa-instagram"></i></a>
-                                </li>
-                                <li>
-                                    <a href="#"><i class="fab fa-google-plus-g"></i></a>
-                                </li>
-                                <li>
-                                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                                    <a href="https://github.com/sg-source" target="_blank"><i class="fab fa-github"></i></a>
                                 </li>
                             </ul>
                         </div>

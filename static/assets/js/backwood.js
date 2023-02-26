@@ -207,13 +207,12 @@ $(document).on('submit', '.add-product-form', function(e){
                     },'linear');
                 }
 
-
+                $('.cart_and_wish').html(response.sidebar_actions)
 
                 if (window.location.pathname != '/') {
-                        $('.header__top').html(response)
-                        console
+                        $('.header__action').html(response.header_actions)
                 } else {
-                    $('.header__bottom-right-render').html(response)
+                    $('.header__bottom-right-render').html(response.header_actions)
                 }
 
                 $.ajax({
@@ -261,12 +260,14 @@ $(document).on('submit', '.remove-product-form', function(e){
                     $('.cart-area .container').html(response.empty_cart)
                 }
             } else {
+                $('.cart_and_wish').html(response.sidebar_actions)
+
                 if (window.location.pathname != '/') {
-                    $('.header__top').html(response)
-                    console
+                        $('.header__action').html(response.header_actions)
                 } else {
-                    $('.header__bottom-right-render').html(response)
+                    $('.header__bottom-right-render').html(response.header_actions)
                 }
+
                 $.ajax({
                     type: 'GET',
                     url: '/cart/cart/',
@@ -626,10 +627,12 @@ $(document).on('submit', '.add-wish-product-form', function(e){
         },
 
         success: function (response) {
+            $('.cart_and_wish').html(response.sidebar_actions)
+
             if (window.location.pathname != '/') {
-                $('.header__top').html(response)
+                    $('.header__action').html(response.header_actions)
             } else {
-                $('.header__bottom-right-render').html(response)
+                $('.header__bottom-right-render').html(response.header_actions)
             }
         }
     });
@@ -656,7 +659,6 @@ $(document).on('submit', '.remove-wish-product-form', function(e){
 $('#contacts-form').on('submit', function(e){
     e.preventDefault()
     var url = window.location.pathname
-    console.log($(this).serialize())
     $.ajax({
         url: url,
         type: 'POST',

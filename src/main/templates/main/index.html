@@ -11,7 +11,7 @@
                 <strong>It has nothing to do with</strong> a real online store,
                 it's just an explicit demonstration of a project where you can test the functionality.
             </span>
-            <button id="headerInfoButton" class="mt-30">Got it</button>
+        <button id="headerInfoButton" class="mt-30">Got it</button>
     </div>
     {% endif %}
     <div class="header__area">
@@ -174,6 +174,14 @@
                                     {% include 'main/includes/header_actions.html' %}
                                 </div>
                             </div>
+                            <div class="header-bar ml-20 d-xl-none">
+                                <button type="button" class="header-bar-btn" data-bs-toggle="modal"
+                                        data-bs-target="#offCanvasModal">
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -189,7 +197,11 @@
 </div>
 
 <div class="body-overlay"></div>
+
+{% include 'main/includes/mobile_menu.html' %}
+
 {% endblock header%}
+
 
 {% block content %}
 <main>
