@@ -10,3 +10,4 @@ services:
     ports:
       - '8080:8080'
 
+#docker system prune --all --force;
