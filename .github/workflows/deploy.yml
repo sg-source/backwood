@@ -16,11 +16,11 @@ jobs:
           echo "$SSH_PRIVATE_KEY" > ../private.key
           sudo chmod 600 ../private.key
           echo "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
+          ssh -i $SSH_KEY_PATH $SSH_USER@$SSH_HOST
+          mkdir test
         shell: bash
         env:
+          SSH_HOST: ${{secrets.SSH_HOST }}
+          SSH_USER: ${{secrets.SSH_USER }}
           SSH_PRIVATE_KEY: ${{secrets.SSH_PRIVATE_KEY}}
           SSH_KNOWN_HOSTS: ${{secrets.SSH_KNOWN_HOSTS}}
-      - name: Run script file
-        run: |
-           ls -la 
-        shell: bash
