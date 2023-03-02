@@ -18,6 +18,7 @@ jobs:
           echo "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
           ssh -i $SSH_KEY_PATH $SSH_USER@$SSH_HOST
           mkdir test
+          ls -la
         shell: bash
         env:
           SSH_HOST: ${{secrets.SSH_HOST }}
