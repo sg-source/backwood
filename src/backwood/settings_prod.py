@@ -22,13 +22,6 @@ CORS_ALLOWED_ORIGINS = [
     'http://84.23.54.118',
 ]
 
-# CORS_ORIGIN_WHITELIST = (
-#     'https://backwood.online',
-#     'http://backwood.online',
-#     'https://84.23.54.118',
-#     'http://84.23.54.118',
-# )
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
