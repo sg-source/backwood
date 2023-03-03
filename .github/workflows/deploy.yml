@@ -46,7 +46,7 @@ jobs:
           sudo chmod 600 ../private.key
           echo "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
           ssh -i $SSH_KEY_PATH $SSH_USER@$SSH_HOST << 'ENDSSH'
-               cd $SSH_REMOTE_DIR/deployment
+               cd ${{secrets.SSH_REMOTE_DIR}}/deployment
                docker-compose up -d --build
           ENDSSH
           
