@@ -45,13 +45,17 @@ jobs:
           echo "$SSH_PRIVATE_KEY" > ../private.key
           sudo chmod 600 ../private.key
           echo "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
-          scp -i $SSH_KEY_PATH -r ./* $SSH_USER@$SSH_HOST:$SSH_REMOTE_DIR
+          ls -la 
+          
+          
+          
         
     
     
     
     
 #       - name: Create SSH key
+# scp -i $SSH_KEY_PATH -r ./* $SSH_USER@$SSH_HOST:$SSH_REMOTE_DIR
 #         run: |
 #           mkdir -p ~/.ssh/
 #           echo "$SSH_PRIVATE_KEY" > ../private.key
