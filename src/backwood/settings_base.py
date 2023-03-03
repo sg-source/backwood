@@ -133,12 +133,6 @@ STATICFILES_FINDERS = [
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# SESSION_COOKIE_AGE =
-# SESSION_COOKIE_DOMAIN=
-# SESSION_COOKIE_SECURE =
-# SESSION_EXPIRE_AT_BROWSER_CLOSE =
-# SESSION_SAVE_EVERY_REQUEST =
-
 CART_SESSION_ID = 'cart'
 FAVOURITES_SESSION_ID = 'favourites'
 RECENTLY_VIEWED_SESSION_ID = 'recently_viewed'
@@ -147,10 +141,6 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 SITE_ID = 1
 
 LOGIN_REDIRECT_URL = 'main:index'
-
-# AUTHENTICATION_BACKENDS = (
-#     'django.contrib.auth.backends.ModelBackend',
-# )
 
 LOGIN_URL = '/auth/login'
 

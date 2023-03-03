@@ -1,27 +1,19 @@
 from .settings_base import *
 
-SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-w$@1286^cqdzo!+jp@w3$6kv9ngh^ckl$-ntl0%tv6_3)&u)&@')
+SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
 
-DEBUG = os.environ.get('DEBUG', 0)
+DEBUG = os.environ.get('DEBUG')
 
 ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS').split(' ')
 
 CORS_ORIGIN_ALLOW_ALL = False
 
-CSRF_TRUSTED_ORIGINS = [
-    'https://backwood.online',
-    'http://backwood.online',
-    'https://84.23.54.118',
-    'http://84.23.54.118',
-]
+CSRF_TRUSTED_ORIGINS = os.environ.get('CSRF_TRUSTED_ORIGINS').split(' ')
 
-CORS_ALLOWED_ORIGINS = [
-    'https://backwood.online',
-    'http://backwood.online',
-    'https://84.23.54.118',
-    'http://84.23.54.118',
-]
+CORS_ALLOWED_ORIGINS = os.environ.get('CORS_ALLOWED_ORIGINS').split(' ')
 
+
+# TODO Postgres
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
