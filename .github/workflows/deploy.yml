@@ -32,20 +32,26 @@ jobs:
           echo "CORS_ALLOWED_ORIGINS=${{secrets.CORS_ALLOWED_ORIGINS}}" >> .env/prod.env
           echo "ADMIN_URL=${{secrets.ADMIN_URL}}" >> .env/prod.env
           cat .env/prod.env
-      - name: Create SSH key
-        env: 
-          SSH_HOST: ${{secrets.SSH_HOST }}
-          SSH_USER: ${{secrets.SSH_USER }}
-          SSH_PRIVATE_KEY: ${{secrets.SSH_PRIVATE_KEY}}
-          SSH_KNOWN_HOSTS: ${{secrets.SSH_KNOWN_HOSTS}}
-          SSH_REMOTE_DIR: ${{secrets.SSH_REMOTE_DIR}}
-          SSH_KEY_PATH: ${{ github.workspace }}/../private.key
+      - name: SSH
         run: |
-          mkdir -p ~/.ssh/
-          echo "$SSH_PRIVATE_KEY" > ../private.key
-          sudo chmod 600 ../private.key
-          echo "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
-          scp -i $SSH_KEY_PATH -r ./.env ./deployment ./media ./requirements.txt ./src ./static $SSH_USER@$SSH_HOST:$SSH_REMOTE_DIR 
+          ssh -i $SSH_KEY_PATH $SSH_USER@$SSH_HOST << 'ENDSSH'
+              cat .env/prod.env
+          
+        
+#       - name: Create SSH key
+#         env: 
+#           SSH_HOST: ${{secrets.SSH_HOST }}
+#           SSH_USER: ${{secrets.SSH_USER }}
+#           SSH_PRIVATE_KEY: ${{secrets.SSH_PRIVATE_KEY}}
+#           SSH_KNOWN_HOSTS: ${{secrets.SSH_KNOWN_HOSTS}}
+#           SSH_REMOTE_DIR: ${{secrets.SSH_REMOTE_DIR}}
+#           SSH_KEY_PATH: ${{ github.workspace }}/../private.key
+#         run: |
+#           mkdir -p ~/.ssh/
+#           echo "$SSH_PRIVATE_KEY" > ../private.key
+#           sudo chmod 600 ../private.key
+#           echo "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
+#           scp -i $SSH_KEY_PATH -r ./.env ./deployment ./media ./requirements.txt ./src ./static $SSH_USER@$SSH_HOST:$SSH_REMOTE_DIR 
           
           
         
