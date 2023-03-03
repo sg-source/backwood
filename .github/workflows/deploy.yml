@@ -23,7 +23,6 @@ jobs:
           ADMIN_URL: ${{secrets.ADMIN_URL}}
         run: | 
           ls -la 
-          source .env/prod.env
           echo $ADMIN_URL
         
     
