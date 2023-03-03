@@ -24,7 +24,7 @@ jobs:
         run: | 
           echo DEBUG=0 >> .env/prod.env
           echo "ALLOWED_HOSTS=192.168.1.22 backwood.online" >> .env/prod.env
-          ls -la .env/prod.env
+          cat .env/prod.env
         
     
     
