@@ -36,6 +36,7 @@ jobs:
         run: |
           ssh -i $SSH_KEY_PATH $SSH_USER@$SSH_HOST << 'ENDSSH'
               cat .env/prod.env
+          ENDSSH
           
         
 #       - name: Create SSH key
