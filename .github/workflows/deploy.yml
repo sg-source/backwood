@@ -12,7 +12,7 @@ jobs:
     steps:
       - name: Checkout main
         uses: actions/checkout@v2
-      - name: Test
+      - name: Create prod.env
         env:
           SECRET_KEY: ${{secrets.DJANGO_SECRET_KEY}}
           DJANGO_SUPERUSER_PASSWORD: ${{secrets.DJANGO_SUPERUSER_PASSWORD}}
@@ -24,7 +24,7 @@ jobs:
         run: | 
           echo DEBUG=0 >> .env/prod.env
           echo "ALLOWED_HOSTS=192.168.1.22 backwood.online" >> .env/prod.env
-          echo "DJANGO_SECRET_KEY=${{secrets.DJANGO_SECRET_KEY}}"x >> .env/prod.env
+          echo "DJANGO_SECRET_KEY=${{secrets.DJANGO_SECRET_KEY}}" >> .env/prod.env
           echo "DJANGO_SUPERUSER_PASSWORD=${{secrets.DJANGO_SUPERUSER_PASSWORD}}" >> .env/prod.env
           echo "DJANGO_SUPERUSER_EMAIL=${{secrets.DJANGO_SUPERUSER_EMAIL}}" >> .env/prod.env
           echo "DJANGO_SUPERUSER_FIRSTNAME=${{secrets.DJANGO_SUPERUSER_FIRSTNAME}}" >> .env/prod.env
@@ -32,6 +32,16 @@ jobs:
           echo "CORS_ALLOWED_ORIGINS=${{secrets.CORS_ALLOWED_ORIGINS}}" >> .env/prod.env
           echo "ADMIN_URL=${{secrets.ADMIN_URL}}" >> .env/prod.env
           cat .env/prod.env
+      - name: Deploy
+        env: 
+          SSH_HOST: ${{secrets.SSH_HOST }}
+          SSH_USER: ${{secrets.SSH_USER }}
+          SSH_PRIVATE_KEY: ${{secrets.SSH_PRIVATE_KEY}}
+          SSH_KNOWN_HOSTS: ${{secrets.SSH_KNOWN_HOSTS}}
+          SSH_REMOTE_DIR: ${{secrets.SSH_REMOTE_DIR}}
+          SSH_KEY_PATH: ${{ github.workspace }}/../private.key
+        run: |
+          scp -r ./* $SSH_USER@$SSH_HOST:$SSH_REMOTE_DIR
         
     
     
