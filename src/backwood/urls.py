@@ -1,10 +1,12 @@
+import os
+
 from django.contrib import admin
 from django.urls import path, include
 from django.conf.urls.static import static
 from django.conf import settings
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path(f'{os.environ.get("ADMIN_URL", "admin/")}', admin.site.urls),
     path('', include('main.urls', namespace='main')),
     path('auth/', include('authapp.urls', namespace='auth')),
     path('cart/', include('cart.urls', namespace='cart')),
