@@ -46,7 +46,6 @@ jobs:
           sudo chmod 600 ../private.key
           echo "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
           scp -i $SSH_KEY_PATH -r ./.env ./deployment ./media ./requirements.txt ./src ./static $SSH_USER@$SSH_HOST:$SSH_REMOTE_DIR 
-          ls
           
           
         
